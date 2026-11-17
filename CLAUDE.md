@@ -27,7 +27,7 @@ Chiunque in ufficio può chiedere modifiche a Claude: queste regole valgono per 
 
 ## Da non toccare senza approvazione di Mauro
 - Footer con i dati societari
-- Privacy e cookie (gestiti con Iubenda)
+- Privacy e cookie: il sito usa solo cookie tecnici, quindi niente banner. Privacy e cookie policy sono su Iubenda (link nel footer). **Prima di aggiungere Google Analytics, pixel di Meta/TikTok o altri servizi che tracciano**, va rimesso il banner dei cookie di Iubenda: chiedi a Mauro.
 - Codici di statistiche e pixel (Google Analytics, Meta, TikTok)
 
 ## Struttura attuale
