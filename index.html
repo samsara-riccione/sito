@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Samsara Riccione — concept homepage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,300..900&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#10264A; --ink-soft:rgba(16,38,74,.72);
+  --sun:#FFD23F; --coral:#FF6B57; --magenta:#E0337A; --violet:#7B2FF7; --cyan:#3FE0E8;
+  --sky-top:#8EC9E8; --sky-bot:#FBD9B5; --sea:#4FA9B8;
+  --fg:var(--ink); --fg-soft:var(--ink-soft);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Instrument Sans",system-ui,sans-serif;color:var(--fg);background:#0E0A2E;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:4px}
+
+/* ---------- the sky (fixed stage) ---------- */
+#stage{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-bot) 78%);overflow:hidden}
+#stars{position:absolute;inset:0;opacity:0;transition:opacity .4s}
+#stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff}
+#sun{position:absolute;width:22vmin;height:22vmin;border-radius:50%;left:0;top:0;
+  background:radial-gradient(circle at 40% 38%,#FFF3B0 0%,var(--sun) 45%,#FFB321 100%);
+  box-shadow:0 0 8vmin 2vmin rgba(255,210,63,.55);will-change:transform}
+#moon{position:absolute;right:12vw;top:12vh;width:9vmin;height:9vmin;border-radius:50%;
+  box-shadow:inset -2.4vmin 1.2vmin 0 0 #F4ECD8;opacity:0}
+#lasers{position:absolute;left:50%;bottom:22vh;width:0;height:0;opacity:0}
+#lasers b{position:absolute;left:-9px;bottom:0;width:18px;height:120vh;transform-origin:50% 100%;border-radius:20px;
+  background:linear-gradient(0deg,currentColor 0%,currentColor 30%,transparent 90%);filter:blur(7px);opacity:.75}
+#sea{position:absolute;left:0;right:0;bottom:0;height:24vh;background:var(--sea);z-index:2}
+#sea svg{position:absolute;left:0;top:-3.2vh;width:200%;height:4vh;animation:drift 14s linear infinite}
+#sea svg.b{top:-1.6vh;opacity:.55;animation-duration:22s;animation-direction:reverse}
+#glint{position:absolute;top:0;width:22vmin;height:100%;opacity:.45;
+  background:repeating-linear-gradient(180deg,rgba(255,240,180,.9) 0 3px,transparent 3px 14px);
+  -webkit-mask:linear-gradient(180deg,#000,transparent);mask:linear-gradient(180deg,#000,transparent)}
+@keyframes drift{to{transform:translateX(-50%)}}
+
+/* ---------- chrome ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:18px 4vw;gap:16px;transition:background .3s,backdrop-filter .3s}
+header.scrolled{background:color-mix(in srgb,var(--sky-top) 70%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.logo svg{height:40px;width:auto;display:block}
+.logo{display:inline-flex;align-items:center;font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 130;font-size:22px;letter-spacing:.02em;text-decoration:none}
+nav.main{display:flex;gap:22px;font-weight:500;font-size:15px}
+nav.main a{text-decoration:none;opacity:.85}
+nav.main a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.lang{display:flex;gap:2px;font-size:13px;font-weight:600}
+.lang button{all:unset;cursor:pointer;padding:4px 7px;border-radius:20px;opacity:.6}
+.lang button[aria-pressed=true]{opacity:1;background:color-mix(in srgb,currentColor 14%,transparent)}
+#clock{position:fixed;right:4vw;bottom:4vh;z-index:20;font-family:Anybody;font-weight:300;font-variation-settings:"wdth" 60;
+  font-size:clamp(34px,3.6vw,54px);line-height:1;font-variant-numeric:tabular-nums;pointer-events:none;mix-blend-mode:normal}
+#clock small{display:block;font-family:"Instrument Sans";font-size:13px;font-weight:600;letter-spacing:.02em;text-align:right;opacity:.75;margin-top:4px}
+.wa{position:fixed;left:4vw;bottom:4vh;z-index:20;display:flex;align-items:center;gap:10px;background:#25D366;color:#06301A;
+  font-weight:600;font-size:15px;padding:12px 18px 12px 14px;border-radius:40px;text-decoration:none;box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.wa svg{width:22px;height:22px}
+
+/* ---------- content over the sky ---------- */
+main{position:relative;z-index:10}
+.hour{min-height:100vh;padding:22vh 4vw 30vh;display:grid;grid-template-columns:minmax(0,640px);align-content:center}
+.hour h2{font-family:Anybody;font-weight:800;font-size:clamp(44px,7.4vw,112px);line-height:.92;letter-spacing:-.01em;
+  font-variation-settings:"wdth" 92;margin-bottom:22px;text-wrap:balance}
+.hour p{max-width:34em;color:var(--fg-soft);font-size:clamp(17px,1.3vw,20px)}
+.hour p + p{margin-top:12px}
+.when{font-weight:600;font-size:15px;margin-bottom:14px;color:var(--fg)}
+.right{justify-content:end}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:16px;padding:14px 22px;border-radius:40px;text-decoration:none;
+  border:2px solid currentColor;transition:background .2s,color .2s}
+.btn.solid{background:var(--fg);color:var(--bg-on, #fff);border-color:var(--fg)}
+.btn:hover{transform:translateY(-1px)}
+.btn small{font-weight:500;opacity:.7;font-size:13px}
+
+/* hero */
+#hero{position:relative;height:100vh;min-height:520px;--hz:74.5vh;--lw:min(56vw,640px)}
+#hero .tag{position:absolute;left:50%;bottom:calc(100% - var(--hz) + var(--lw)*.362 + 5vh + 4vh);translate:-50% 0;width:min(90vw,34em);
+  text-align:center;font-size:clamp(17px,1.5vw,22px);font-weight:500;line-height:1.45;opacity:0;transition:opacity 1s ease 2.3s}
+#hero .rise{position:absolute;left:0;right:0;top:0;height:var(--hz);overflow:hidden;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
+#hero .reflect{position:absolute;left:50%;top:calc(var(--hz) + 4.5vh);width:min(56vw,640px);translate:-50% 0;color:#fff;pointer-events:none;
+  opacity:0;filter:blur(2.5px);transform-origin:top;animation:ripple 3.5s ease-in-out infinite;
+  -webkit-mask:linear-gradient(to bottom,#000 0%,transparent 42%);mask:linear-gradient(to bottom,#000 0%,transparent 42%);
+  transition:opacity 1.4s ease 1.6s}
+#hero .reflect svg{display:block;width:100%;height:auto;transform:scaleY(-1)}
+@keyframes ripple{0%,100%{transform:skewX(0) scaleX(1)}50%{transform:skewX(-2.5deg) scaleX(1.02)}}
+#hero .hero-cta{position:absolute;left:0;right:0;top:calc(var(--hz) + 13vh);justify-content:center;margin:0;padding:0 4vw;z-index:2}
+#hero .hero-cta .btn{color:#fff;border-color:#fff;opacity:0;transform:translateY(12px);transition:opacity .7s ease,transform .7s ease,background .2s}
+#hero .hero-cta .btn.solid{background:#fff;color:#10264A}
+#hero .hero-cta .btn:nth-child(1){transition-delay:2.4s}#hero .hero-cta .btn:nth-child(2){transition-delay:2.55s}
+body.ready #hero .tag,body.ready #hero .reflect{opacity:1}
+body.ready #hero .reflect{opacity:.3}
+body.ready #hero .hero-cta .btn{opacity:1;transform:none}
+body.ready #hero .hero-cta .btn:hover{transform:translateY(-1px)}
+#hero h1{width:min(56vw,640px);margin-bottom:5vh;transform:translateY(calc(100% + 7vh));animation:emerge 2.6s cubic-bezier(.45,0,.15,1) .2s forwards}
+#hero h1 svg{display:block;width:100%;height:auto}
+@keyframes emerge{0%{transform:translateY(calc(100% + 7vh))}78%{transform:translateY(-1vh)}100%{transform:translateY(0)}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* menu teaser */
+.menu{margin-top:28px;display:grid;grid-template-columns:1fr auto;gap:10px 28px;max-width:520px;font-size:17px}
+.menu dt{font-weight:500}
+.menu dd{font-variant-numeric:tabular-nums;color:var(--fg-soft)}
+.note{font-size:13px!important;opacity:.75;margin-top:14px}
+
+/* party */
+#party h2{font-variation-settings:"wdth" var(--party-w,60);font-size:clamp(56px,11vw,190px);font-weight:900}
+.dates{list-style:none;margin-top:30px;max-width:620px;border-top:1px solid rgba(255,255,255,.25)}
+.dates li{display:grid;grid-template-columns:110px 1fr auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.25)}
+.dates time{font-family:Anybody;font-weight:700;font-variation-settings:"wdth" 70;font-size:22px}
+.dates span{font-weight:500}
+.dates a{font-size:14px;font-weight:600;padding:8px 14px;border-radius:30px;border:1.5px solid currentColor;text-decoration:none}
+
+/* mobile menu */
+.menu-btn{all:unset;display:none;cursor:pointer;width:44px;height:44px;position:relative;border-radius:50%;background:color-mix(in srgb,currentColor 12%,transparent)}
+.menu-btn span:not(.sr){position:absolute;left:12px;right:12px;height:2px;background:currentColor;transition:transform .3s,top .3s}
+.menu-btn span:nth-child(1){top:17px}.menu-btn span:nth-child(2){top:25px}
+.menu-btn[aria-expanded=true] span:nth-child(1){top:21px;transform:rotate(45deg)}
+.menu-btn[aria-expanded=true] span:nth-child(2){top:21px;transform:rotate(-45deg)}
+#mnav{position:fixed;inset:0;z-index:19;background:#0E0A2E;color:#F3EEFF;padding:96px 6vw 40px;display:flex;flex-direction:column;gap:28px;overflow-y:auto;
+  clip-path:circle(0 at calc(100% - 40px) 40px);transition:clip-path .5s cubic-bezier(.7,0,.2,1)}
+#mnav.open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+#mnav ul{list-style:none}
+#mnav li a{display:block;text-decoration:none;font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 110;font-size:clamp(28px,8vw,44px);line-height:1.25;padding:2px 0}
+#mnav .mnav-cta{display:flex;flex-direction:column;gap:12px}
+#mnav .btn{justify-content:center;color:#F3EEFF}
+#mnav .btn.solid{background:#FFD23F;color:#10264A;border-color:#FFD23F}
+body.menu-on #clock,body.menu-on .wa{opacity:0;pointer-events:none}
+header.menu-open{color:#F3EEFF!important;background:transparent!important;backdrop-filter:none!important}
+@media (max-width:860px){
+  .menu-btn{display:block}
+  header>.lang{display:none}
+}
+/* intro */
+#intro{position:fixed;inset:0;z-index:100;background:#0E0A2E;display:grid;place-items:center;overflow:hidden;cursor:pointer}
+#intro .core{display:grid;justify-items:center;gap:22px;position:relative;z-index:2;transition:opacity .4s}
+#intro svg{width:min(26vw,150px);height:auto;overflow:visible}
+#intro path{fill:none;stroke:#F3EEFF;stroke-width:8;stroke-linejoin:miter;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.7s cubic-bezier(.6,0,.3,1) .3s forwards,warm .5s ease 2s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes warm{to{stroke:#FFD23F}}
+#intro .t{font-family:Anybody;font-weight:300;font-variation-settings:"wdth" 60;font-size:clamp(34px,5vw,56px);color:#F3EEFF;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+#intro .burst{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;
+  background:radial-gradient(circle,#FFF3B0 0%,#FFD23F 30%,#FBD9B5 60%,#8EC9E8 100%);transform:scale(0);z-index:1}
+#intro.go .burst{transition:transform 1s cubic-bezier(.7,0,.2,1);transform:scale(90)}
+#intro.go .core{opacity:0}
+#intro.out{opacity:0;transition:opacity .5s ease .1s;pointer-events:none}
+#intro .skip{position:absolute;right:4vw;bottom:4vh;z-index:3;font:600 14px "Instrument Sans";color:rgba(243,238,255,.6);background:none;border:0;cursor:pointer}
+#hero h1{animation-play-state:paused}
+body.ready #hero h1{animation-play-state:running}
+/* weather */
+#meteo{padding:16vh 4vw 26vh;min-height:70vh;display:flex;flex-direction:column;justify-content:center}
+.meteo-head h2{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 92;font-size:clamp(36px,5vw,76px);line-height:.95;margin-bottom:12px}
+.meteo-head p{color:var(--fg-soft);max-width:34em}
+.meteo-days{list-style:none;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));margin-top:5vh;
+  background:color-mix(in srgb,#fff 34%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-radius:24px;overflow:hidden}
+.meteo-days li{padding:22px 10px 20px;text-align:center;display:grid;justify-items:center;gap:6px;border-left:1px solid rgba(16,38,74,.12)}
+.meteo-days li:first-child{border-left:0}
+.meteo-days li.today{background:rgba(255,255,255,.55)}
+.meteo-days .d{font-weight:600;font-size:15px}
+.meteo-days .d small{display:block;font-weight:500;font-size:13px;color:var(--fg-soft)}
+.meteo-days svg{width:52px;height:52px;margin:6px 0}
+.meteo-days .hi{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 80;font-size:30px;line-height:1}
+.meteo-days .lo{font-size:15px;color:var(--fg-soft)}
+.meteo-days .rain{font-size:13px;font-weight:600;color:#1E6FB8;display:flex;align-items:center;gap:4px}
+.meteo-days .rain i{width:7px;height:9px;background:#3F8FDD;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;display:inline-block}
+@media (max-width:860px){
+  .meteo-days{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:-6vw;border-radius:20px 0 0 20px}
+  .meteo-days li{flex:0 0 31%;scroll-snap-align:start}
+}
+/* spotify */
+#spotify{position:relative;padding:14vh 4vw 22vh;color:#F3EEFF}
+.sp-head h2{font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 120;font-size:clamp(40px,6vw,96px);line-height:.95;margin-bottom:14px}
+.sp-head p{color:rgba(243,238,255,.78);max-width:36em}
+.discs{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6vh 4vw;margin-top:7vh;padding-right:9%}
+.disc{all:unset;cursor:pointer;display:grid;gap:18px;color:inherit;width:100%}
+.disc:focus-visible{outline:3px solid #FFD23F;outline-offset:6px;border-radius:6px}
+.sleeve{position:relative;display:block;aspect-ratio:1}
+.cover{position:absolute;inset:0;z-index:2;overflow:hidden;border-radius:6px;box-shadow:0 24px 50px -20px rgba(0,0,0,.75);color:#fff;
+  background:var(--g);isolation:isolate;container-type:inline-size}
+.cover>img{position:absolute;right:-8%;bottom:-6%;width:78%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%;
+  filter:grayscale(1) contrast(1.15);mix-blend-mode:multiply;opacity:.9;z-index:-1}
+.cover::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 27% 38%,var(--sun) 0 13%,transparent 14%);z-index:-1}
+.cv-mark{position:absolute;left:7%;top:7%;width:11%;color:inherit}
+.cv-h{position:absolute;right:7%;top:6%;font-family:Anybody;font-weight:300;font-variation-settings:"wdth" 60;font-size:8cqw;line-height:1}
+.cv-t{position:absolute;left:7%;bottom:15%;right:10%;font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 112;font-size:10.5cqw;line-height:.92;text-wrap:balance}
+.cv-d{position:absolute;left:7%;bottom:7%;font-size:max(10px,3.6cqw);font-weight:600;opacity:.85}
+.c1{--g:linear-gradient(160deg,#9AD3EE 0%,#FBD9B5 100%);--sun:#FFD23F}.c1 .cover{color:#10264A}.c1 .cover>img{opacity:.35}
+.c2{--g:linear-gradient(160deg,#2F9FE0 0%,#A9E4F5 100%);--sun:#FFF3B0}.c2 .cover{color:#10264A}
+.c3{--g:linear-gradient(160deg,#F5B13D 0%,#FF7A59 100%);--sun:#FFF3B0}
+.c4{--g:linear-gradient(160deg,#3B3F8F 0%,#FF7A59 100%);--sun:#FFB321}
+.c5{--g:linear-gradient(160deg,#7B2FF7 0%,#E0337A 100%);--sun:#3FE0E8}
+.c6{--g:linear-gradient(160deg,#0E0A2E 0%,#3A1670 100%);--sun:#F4ECD8}
+.c6 .cover::before{background:radial-gradient(circle at 32% 34%,#2A1258 0 11%,transparent 12%),radial-gradient(circle at 27% 38%,var(--sun) 0 12%,transparent 13%)}
+.sleeve .vinyl{position:absolute;inset:3%;z-index:1;border-radius:50%;background:repeating-radial-gradient(circle,#141019 0 2px,#221b2c 2px 3px);
+  box-shadow:0 14px 30px -12px rgba(0,0,0,.7);transform:translateX(9%);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.sleeve .vinyl::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 30deg,transparent 0 40deg,rgba(255,255,255,.14) 55deg,transparent 75deg 220deg,rgba(255,255,255,.1) 235deg,transparent 255deg)}
+.sleeve .vinyl img{position:absolute;inset:33%;width:34%;height:34%;object-fit:cover;border-radius:50%;box-shadow:0 0 0 3px #FFD23F}
+.disc:hover .vinyl,.disc:focus-visible .vinyl,.disc.on .vinyl{transform:translateX(42%)}
+.disc:hover .vinyl img,.disc:focus-visible .vinyl img,.disc.on .vinyl img{animation:spin 2.2s linear infinite}
+.disc.on .vinyl img{animation-duration:1.6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.meta{display:grid;gap:2px}
+.meta strong{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(18px,1.5vw,24px);line-height:1.15}
+.meta span{color:rgba(243,238,255,.8);font-size:15px}
+.meta small{color:rgba(243,238,255,.55);font-size:13px}
+.sp-msg{min-height:1.4em;margin-top:4vh;font-weight:600;color:#1ED760}
+.sp-all{margin-top:2vh;color:#F3EEFF;gap:12px}
+.sp-all svg{width:24px;height:24px}
+@media (max-width:860px){.discs{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 26px;padding-right:12%}}
+@media (prefers-reduced-motion:reduce){.disc .vinyl img{animation:none!important}}
+/* christmas mode */
+.xm-only{display:none!important}
+body.xmas .xm-only{display:revert!important}
+body.xmas .actions.xm-only{display:flex!important}
+body.xmas .xm-hide{display:none!important}
+.concept{display:flex;align-items:center;gap:8px}
+.concept .mode{display:inline-flex;background:rgba(16,38,74,.12);border-radius:20px;padding:2px}
+.concept .mode button{all:unset;cursor:pointer;padding:3px 10px;border-radius:16px;font-weight:600}
+.concept .mode button[aria-pressed=true]{background:#10264A;color:#FFD23F}
+.concept .mode button:focus-visible{outline:2px solid #10264A;outline-offset:2px}
+#xsnow{position:absolute;inset:0;z-index:3;pointer-events:none;display:none}
+body.xmas #xsnow{display:block}
+#xsnow i{position:absolute;top:-12px;border-radius:50%;background:#fff;animation:fall linear infinite}
+#xsnow i.gold{border-radius:1px;background:#F5C33B;width:9px!important;height:3px!important}
+body.xmas #hero .tag strong{display:block;font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 130;font-size:clamp(26px,3vw,44px);line-height:1;margin-bottom:6px;letter-spacing:.01em}
+#hero .count{display:block;margin-top:10px;font-weight:600;font-variant-numeric:tabular-nums}
+@keyframes twinkle{50%{opacity:.55}}
+.season{margin-top:16px!important;font-weight:600;color:var(--fg)!important;padding:12px 16px;border-radius:12px;background:color-mix(in srgb,#fff 45%,transparent);max-width:34em}
+@media (max-width:860px){
+  .concept{display:flex!important;top:66px;font-size:12px;padding:4px 6px 4px 10px}
+  .concept .c-lab{display:none}
+}
+@media (prefers-reduced-motion:reduce){#xsnow{display:none!important}#bokeh i{animation:none}}
+/* christmas: elegant */
+body.xmas{--gold:#D8B46A;--gold-2:#F3DDA6;--night:#0B1426}
+#bokeh{position:absolute;inset:0;z-index:1;pointer-events:none;display:none}
+body.xmas #bokeh{display:block}
+#bokeh i{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,226,160,.55) 0%,rgba(255,206,120,.18) 45%,transparent 70%);
+  animation:float ease-in-out infinite alternate}
+@keyframes float{to{transform:translate(var(--dx),var(--dy))}}
+body.xmas #xsnow i{background:#fff;box-shadow:0 0 4px rgba(255,255,255,.8)}
+body.xmas #xsnow i.gold{border-radius:50%;width:2px!important;height:2px!important;background:var(--gold-2);box-shadow:0 0 6px var(--gold)}
+body.xmas #hero h1{color:#F3DDA6;filter:drop-shadow(0 0 22px rgba(216,180,106,.45))}
+body.xmas #hero .reflect{color:var(--gold-2)}
+body.xmas #hero .tag{color:rgba(245,236,220,.88);font-weight:400;letter-spacing:.01em}
+body.xmas #hero .tag strong{color:#F5ECDC;font-weight:300;font-variation-settings:"wdth" 150;letter-spacing:.04em;margin:8px 0 10px}
+#hero .greet{display:block;font-size:.85em;color:var(--gold);letter-spacing:.08em}
+#hero .count{color:var(--gold-2);font-weight:500;margin-top:14px;font-size:.9em}
+body.xmas #hero .hero-cta .btn{border-color:rgba(243,221,166,.7);color:#F5ECDC}
+body.xmas #hero .hero-cta .btn.solid{background:var(--gold);border-color:var(--gold);color:var(--night)}
+body.xmas #intro{background:radial-gradient(circle at 50% 45%,#16233D 0%,#0B1426 70%)}
+body.xmas #intro path{animation:draw 1.7s cubic-bezier(.6,0,.3,1) .3s forwards,goldy .5s ease 2s forwards}
+@keyframes goldy{to{stroke:#D8B46A}}
+body.xmas #intro .burst{background:radial-gradient(circle,#FFF1CF 0%,#E9B872 30%,#5A4A6E 65%,#14213D 100%)}
+body.xmas #sun{background:radial-gradient(circle at 40% 38%,#FFE7B8 0%,#F2B566 55%,#D9854A 100%);box-shadow:0 0 10vmin 3vmin rgba(242,181,102,.45)}
+.xm-bye{position:relative;z-index:10;background:var(--night);color:#F5ECDC;text-align:center;padding:18vh 6vw;border-top:1px solid rgba(216,180,106,.25)}
+.xm-bye .orn{display:block;width:120px;height:1px;margin:0 auto 34px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.bye-big{font-family:Anybody;font-weight:200;font-variation-settings:"wdth" 150;letter-spacing:.06em;font-size:clamp(46px,8vw,130px);line-height:1;margin:0 0 22px;color:var(--gold-2)}
+.bye-small{font-size:clamp(16px,1.3vw,20px);color:rgba(245,236,220,.75)}
+.xm-bye .btn{margin-top:34px;color:var(--gold-2);border-color:rgba(216,180,106,.7);background:transparent}
+.xm-bye .btn:hover{background:var(--gold);color:var(--night)}
+body.xmas .xm-bye{display:block!important}
+body.xmas .season{background:rgba(11,20,38,.55);color:#F5ECDC!important}
+/* photos */
+.split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6vw;align-items:center}
+.ph{margin:0;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(14,10,46,.55)}
+.ph img{display:block;width:100%;height:100%;object-fit:cover}
+.ph.land{aspect-ratio:4/3;transform:rotate(2deg)}
+.ph.tall{aspect-ratio:2/3;max-height:82vh;transform:rotate(-2deg)}
+#reel{position:relative;height:340vh}
+.reel-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:4vh}
+#reel h2{font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 120;font-size:clamp(40px,6vw,96px);line-height:.95;padding:0 4vw;color:#F3EEFF}
+.reel-track{display:flex;gap:2.4vw;padding:0 4vw;width:max-content;will-change:transform}
+.reel-track img{height:58vh;width:auto;aspect-ratio:3/2;object-fit:cover;border-radius:22px}
+.reel-track img:nth-child(odd){transform:translateY(3vh)}
+.reel-track .r-vid{height:58vh;width:auto;aspect-ratio:9/16;object-fit:cover;border-radius:22px}
+.reel-track img[src$="p02.webp"]{aspect-ratio:2/3}
+.ph.vid video{display:block;width:100%;height:100%;object-fit:cover}
+.ph.vid{aspect-ratio:9/16;max-height:80vh;justify-self:center}
+
+/* after-dark block: solid night */
+.night{position:relative;z-index:10;background:#0E0A2E;color:#F3EEFF;padding:14vh 4vw}
+.night h2{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(36px,5vw,72px);line-height:.95;margin-bottom:18px}
+.night p{color:rgba(243,238,255,.75);max-width:36em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:start}
+.cities{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;max-width:640px}
+.cities span{font-size:15px;padding:7px 13px;border-radius:30px;background:rgba(255,255,255,.08)}
+.cities span.new{background:var(--violet);color:#fff}
+.legend{font-size:14px;margin-top:12px;color:rgba(243,238,255,.6)}
+form{display:grid;gap:14px;margin-top:22px;max-width:520px}
+label{font-size:14px;font-weight:600;display:grid;gap:6px}
+input,select,textarea{font:inherit;font-size:16px;color:#fff;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.22);border-radius:12px;padding:12px 14px}
+textarea{min-height:96px;resize:vertical}
+select option{color:#000}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form .btn{justify-self:start;background:#F3EEFF;color:#0E0A2E;border-color:#F3EEFF;cursor:pointer}
+.ok{font-weight:600;color:var(--cyan);min-height:1.4em}
+.capodanno{position:relative;overflow:hidden;background:radial-gradient(ellipse at 40% 0%,#DCEAF4 0%,#8FAFC6 28%,#3D5A73 70%,#22374A 100%);}
+.capodanno .grid2{position:relative;z-index:1;align-items:center}
+.capodanno h2{font-size:clamp(48px,7vw,120px);font-variation-settings:"wdth" 140;color:#F2FAFF;text-shadow:0 0 30px rgba(190,230,255,.6)}
+.capodanno p{color:rgba(242,250,255,.85)}
+.pack{margin-top:26px;padding:20px 22px;border:1.5px solid rgba(255,255,255,.7);border-radius:16px;max-width:420px}
+.pack p{margin:0}
+.pack .price{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 80;font-size:56px;line-height:1;margin-top:10px;color:#fff}
+.ph.poster{aspect-ratio:3/4;width:100%;max-width:440px;justify-self:center;transform:rotate(2deg)}
+.snow{position:absolute;inset:0;pointer-events:none}
+.snow i{position:absolute;top:-20px;border-radius:50%;background:#fff;opacity:.8;animation:fall linear infinite}
+.snow i.gold{border-radius:2px;background:#F5C33B;width:10px!important;height:4px!important}
+@keyframes fall{to{transform:translateY(120vh) rotate(540deg)}}
+/* food wheel */
+#ristorante{position:relative;height:260vh}
+.food-sticky{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;padding:0 4vw;gap:4vw;overflow:hidden}
+.food-text h2{font-family:Anybody;font-weight:800;font-size:clamp(40px,5.6vw,92px);line-height:.92;font-variation-settings:"wdth" 92;margin-bottom:20px}
+.food-text p{color:var(--fg-soft);max-width:30em;font-size:clamp(17px,1.3vw,20px)}
+.dish{margin-top:26px;min-height:2.6em}
+.dish span{display:inline-block;font-family:Anybody;font-weight:700;font-variation-settings:"wdth" 110;font-size:clamp(20px,1.8vw,28px);color:var(--fg)!important;transition:opacity .25s}
+.wheel-wrap{position:relative;height:100vh}
+.wheel{position:absolute;left:4%;top:50%;width:min(86vh,46vw);aspect-ratio:1;translate:0 -50%;will-change:transform}
+.wheel img{position:absolute;left:50%;top:50%;width:27%;aspect-ratio:1;margin:-13.5% 0 0 -13.5%;filter:drop-shadow(0 14px 22px rgba(16,38,74,.28));transition:width .4s,margin .4s}
+.wheel img.on{width:38%;margin:-19% 0 0 -19%}
+/* tour: brochure identity, black and yellow */
+.tour{position:relative;z-index:10;background:#0A0A0A;color:#fff;padding:14vh 4vw;overflow:hidden;--y:#FFD400}
+.tour h2{font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 130;font-size:clamp(44px,7vw,120px);line-height:.9;color:var(--y);margin-bottom:22px}
+.tour h2 span{color:#fff}
+.tour h3{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 120;font-size:clamp(24px,2.4vw,36px);margin:9vh 0 22px}
+.tour p{color:rgba(255,255,255,.75);max-width:40em}
+.tour .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:3vw;margin-top:8vh}
+.tour .stats div{font-size:15px;color:rgba(255,255,255,.7);border-top:3px solid var(--y);padding-top:16px}
+.tour .stats strong{display:block;font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 110;font-size:clamp(36px,4vw,64px);color:#fff;line-height:1;margin-bottom:8px}
+.ticker{margin:9vh -4vw 0;background:var(--y);color:#0A0A0A;padding:18px 0;overflow:hidden;transform:rotate(-2deg)}
+.ticker-track{display:flex;gap:44px;width:max-content;animation:tick 50s linear infinite}
+.ticker span{font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 120;font-size:clamp(26px,3vw,44px);white-space:nowrap}
+.ticker span::after{content:"";display:inline-block;width:12px;height:12px;background:#0A0A0A;margin-left:44px;vertical-align:middle}
+@keyframes tick{to{transform:translateX(-50%)}}
+.ticker-note{margin-top:5vh;font-size:15px}
+.artists{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.artists figure{margin:0}
+.artists img{width:100%;aspect-ratio:4/3;object-fit:cover;border:3px solid var(--y);display:block}
+.artists figcaption{font-size:14px;color:rgba(255,255,255,.65);margin-top:10px}
+.artists strong{display:block;color:#fff;font-size:16px}
+.tour-cta{margin-top:10vh;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px;border-top:1px solid rgba(255,255,255,.2);padding-top:5vh}
+.tour-cta h3{margin:0 0 8px}
+.tour-btn{background:var(--y);color:#0A0A0A!important;border-color:var(--y)}
+@media (max-width:860px){.tour .stats{grid-template-columns:1fr 1fr}.artists{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+footer{position:relative;z-index:10;background:#07051C;color:rgba(243,238,255,.7);padding:8vh 4vw 16vh;font-size:15px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:4vw}
+footer strong{color:#fff;font-family:Anybody;font-variation-settings:"wdth" 130;font-size:28px;font-weight:800;display:block;margin-bottom:10px}
+footer a{display:block;text-decoration:none;margin:4px 0}
+footer a:hover{text-decoration:underline}
+.concept{position:fixed;top:68px;left:50%;transform:translateX(-50%);z-index:30;background:#FFD23F;color:#10264A;font-size:13px;font-weight:600;padding:6px 14px;border-radius:30px}
+
+@media (max-width:860px){
+  nav.main{display:none}
+  .grid2,.row,footer{grid-template-columns:1fr}
+  .hour{padding:16vh 6vw 30vh}
+  #clock{bottom:auto;top:64px;right:5vw;font-size:44px}
+  #clock small{display:none}
+  .split{grid-template-columns:1fr}
+  .wa{transition:opacity .3s,transform .3s}
+  body.at-top .wa{opacity:0;transform:scale(.6);pointer-events:none}
+  #hero h1,#hero .reflect{width:82vw}
+  #hero{--lw:82vw}
+  #hero .tag{bottom:calc(100% - var(--hz) + var(--lw)*.362 + 5vh + 3vh)}
+  #hero .hero-cta.xm-only{flex-direction:column;align-items:center;top:calc(var(--hz) + 7vh)}
+  #hero .hero-cta{top:calc(var(--hz) + 10vh);gap:8px;flex-wrap:nowrap;padding:0 3vw}
+  #hero .hero-cta .btn{padding:11px 14px;font-size:14px;white-space:nowrap}
+  .food-sticky{grid-template-columns:1fr;grid-template-rows:auto 1fr;padding-top:13vh;gap:0}
+  .food-text h2{font-size:34px}
+  .food-text>p:not(.dish),.food-text .when{display:none}
+  .wheel-wrap{height:100%;min-height:0;container-type:size}
+  .wheel{left:50%;top:50%;translate:-50% -50%;width:min(86cqw,82cqh)}
+  .wa{padding:0;width:56px;height:56px;justify-content:center;font-size:0;gap:0;border-radius:50%}
+  .wa svg{width:28px;height:28px}
+  .wheel img{width:30%;margin:-15% 0 0 -15%}
+  .wheel img.on{width:38%;margin:-19% 0 0 -19%}
+  .ph.poster{max-width:80vw}
+  #party .ph.tall{max-height:60vh}
+  .reel-track img,.reel-track .r-vid{height:44vh}
+  .dates li{grid-template-columns:80px 1fr}
+  .dates a{grid-column:2;justify-self:start}
+  .concept{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  #intro{display:none}
+  html{scroll-behavior:auto}
+  #sea svg{animation:none}
+  #hero h1{animation:none;transform:none}
+  #hero .tag,#hero .reflect,#hero .hero-cta .btn{transition:none}
+  #hero .reflect{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div id="intro" aria-hidden="true">
+  <div class="burst"></div>
+  <div class="core">
+    <svg viewBox="0 0 59.3 59.3"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7"/></svg>
+    <div class="t" id="intro-t">00:00</div>
+  </div>
+  <button class="skip" type="button">Salta</button>
+</div>
+<div id="stage" aria-hidden="true">
+  <div id="stars"></div>
+  <div id="moon"></div>
+  <div id="sun"></div>
+  <div id="lasers"></div>
+  <div id="xsnow"></div>
+  <div id="bokeh"></div>
+  <div id="sea">
+    <div id="glint"></div>
+    <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path fill="var(--sea)" d="M0 20 Q75 0 150 20 T300 20 T450 20 T600 20 T750 20 T900 20 T1050 20 T1200 20 V40 H0Z"/></svg>
+    <svg class="b" viewBox="0 0 1200 40" preserveAspectRatio="none"><path fill="var(--sea)" d="M0 20 Q100 4 200 20 T400 20 T600 20 T800 20 T1000 20 T1200 20 V40 H0Z"/></svg>
+  </div>
+</div>
+
+<header>
+  <a class="logo" href="#hero" aria-label="Samsara Riccione, torna su"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="67.4 128.6 459.7 166.4" fill="currentColor"><path d="M 326.921875 138.714844 L 326.921875 130.613281 L 267.628906 130.613281 L 267.628906 189.703125 L 326.921875 189.703125 L 326.921875 145.039062 L 281.863281 145.039062 L 281.863281 175.671875 L 312.492188 175.671875 L 312.492188 159.273438 L 304.589844 159.273438 L 304.589844 167.375 L 289.765625 167.375 L 289.765625 153.140625 L 319.015625 153.140625 L 319.015625 181.800781 L 275.734375 181.800781 L 275.734375 138.714844 Z M 326.921875 138.714844 "/><path d="M 517.703125 247.949219 L 525.121094 247.949219 L 525.121094 237.679688 L 517.703125 237.679688 Z M 517.703125 247.949219 "/><path d="M 525.015625 205.085938 C 525.015625 208.265625 522.460938 210.78125 519.214844 210.78125 C 515.96875 210.78125 513.378906 208.265625 513.378906 205.085938 C 513.378906 201.910156 515.96875 199.425781 519.246094 199.425781 C 522.460938 199.425781 525.015625 201.910156 525.015625 205.085938 M 514.828125 205.085938 C 514.828125 207.609375 516.730469 209.609375 519.246094 209.609375 C 521.699219 209.640625 523.5625 207.609375 523.5625 205.121094 C 523.5625 202.601562 521.699219 200.566406 519.179688 200.566406 C 516.730469 200.566406 514.828125 202.601562 514.828125 205.085938 M 518.316406 208.023438 L 517.003906 208.023438 L 517.003906 202.359375 C 517.519531 202.289062 518.246094 202.1875 519.179688 202.1875 C 520.25 202.1875 520.734375 202.359375 521.117188 202.636719 C 521.457031 202.878906 521.699219 203.292969 521.699219 203.84375 C 521.699219 204.539062 521.179688 204.984375 520.523438 205.191406 L 520.523438 205.257812 C 521.078125 205.433594 521.351562 205.882812 521.527344 206.640625 C 521.699219 207.503906 521.835938 207.8125 521.9375 208.023438 L 520.5625 208.023438 C 520.390625 207.8125 520.285156 207.328125 520.109375 206.640625 C 520.007812 206.054688 519.664062 205.777344 518.941406 205.777344 L 518.316406 205.777344 Z M 518.351562 204.84375 L 518.972656 204.84375 C 519.695312 204.84375 520.285156 204.605469 520.285156 204.015625 C 520.285156 203.5 519.90625 203.152344 519.078125 203.152344 C 518.730469 203.152344 518.492188 203.1875 518.351562 203.222656 Z M 518.351562 204.84375 "/><path d="M 211.777344 221.460938 L 254.171875 221.460938 L 254.171875 247.953125 L 260.882812 247.953125 L 260.882812 215.453125 L 211.777344 215.453125 Z M 211.777344 221.460938 "/><path d="M 226.972656 247.949219 L 234.746094 247.949219 L 234.746094 224.28125 L 226.972656 224.28125 Z M 226.972656 247.949219 "/><path d="M 201.542969 247.949219 L 208.960938 247.949219 L 208.960938 215.453125 L 201.542969 215.453125 Z M 201.542969 247.949219 "/><path d="M 431.863281 215.453125 L 400.070312 215.453125 L 400.070312 247.949219 L 406.082031 247.949219 L 406.082031 221.8125 L 425.152344 221.8125 L 425.152344 227.109375 L 408.890625 227.109375 L 408.890625 233.117188 L 450.230469 233.117188 L 450.230469 247.949219 L 458.710938 247.949219 L 458.710938 227.109375 L 431.863281 227.109375 Z M 431.863281 215.453125 "/><path d="M 274.308594 221.460938 L 326.941406 221.460938 L 326.941406 215.453125 L 267.597656 215.453125 L 267.597656 234.175781 L 274.308594 234.175781 Z M 274.308594 221.460938 "/><path d="M 267.597656 247.949219 L 316.699219 247.949219 L 316.699219 241.59375 L 267.597656 241.59375 Z M 267.597656 247.949219 "/><path d="M 277.136719 234.175781 L 319.523438 234.175781 L 319.523438 247.953125 L 326.941406 247.953125 L 326.941406 227.816406 L 277.136719 227.816406 Z M 277.136719 234.175781 "/><path d="M 75.785156 221.460938 L 128.421875 221.460938 L 128.421875 215.453125 L 69.429688 215.453125 L 69.429688 234.175781 L 75.785156 234.175781 Z M 75.785156 221.460938 "/><path d="M 69.429688 247.949219 L 118.175781 247.949219 L 118.175781 241.59375 L 69.429688 241.59375 Z M 69.429688 247.949219 "/><path d="M 78.617188 234.175781 L 121.003906 234.175781 L 121.003906 247.953125 L 128.421875 247.953125 L 128.421875 227.816406 L 78.617188 227.816406 Z M 78.617188 234.175781 "/><path d="M 393.355469 203.445312 L 333.65625 203.445312 L 333.65625 209.09375 L 393.355469 209.09375 Z M 393.355469 203.445312 "/><path d="M 385.941406 247.949219 L 393.359375 247.949219 L 393.359375 237.695312 L 385.941406 237.695312 Z M 385.941406 247.949219 "/><path d="M 333.65625 215.453125 L 333.65625 247.949219 L 340.371094 247.949219 L 340.371094 221.8125 L 385.9375 221.8125 L 385.9375 227.816406 L 343.179688 227.816406 L 343.179688 234.882812 L 385.9375 234.882812 L 385.9375 234.90625 L 393.351562 234.90625 L 393.351562 215.453125 Z M 333.65625 215.453125 "/><path d="M 525.121094 215.453125 L 465.425781 215.453125 L 465.425781 247.949219 L 472.136719 247.949219 L 472.136719 221.8125 L 517.703125 221.8125 L 517.703125 227.816406 L 474.953125 227.816406 L 474.953125 234.882812 L 525.121094 234.882812 Z M 525.121094 215.453125 "/><path d="M 187.414062 247.949219 L 194.835938 247.949219 L 194.835938 237.710938 L 187.414062 237.710938 Z M 187.414062 247.949219 "/><path d="M 144.65625 234.90625 L 144.65625 227.816406 L 187.414062 227.816406 L 187.414062 221.8125 L 141.847656 221.8125 L 141.847656 247.949219 L 135.132812 247.949219 L 135.132812 215.453125 L 194.832031 215.453125 L 194.832031 234.90625 Z M 144.65625 234.90625 "/><path d="M 208.378906 279.824219 C 208.378906 278.691406 207.710938 278.125 206.371094 278.125 L 198.539062 278.125 L 198.539062 281.507812 L 206.371094 281.507812 C 207.710938 281.507812 208.378906 280.949219 208.378906 279.824219 M 219.410156 292.171875 L 208.503906 292.171875 L 205.195312 286.953125 L 198.539062 286.953125 L 198.539062 292.171875 L 189.125 292.171875 L 189.125 271.65625 L 210.089844 271.65625 C 213.242188 271.65625 215.5 272.242188 216.855469 273.417969 C 218.214844 274.59375 218.890625 276.386719 218.890625 278.800781 C 218.890625 280.558594 218.503906 281.902344 217.738281 282.828125 C 216.972656 283.753906 215.886719 284.390625 214.484375 284.738281 L 214.484375 285.03125 Z M 219.410156 292.171875 "/><path d="M 220.894531 271.65625 L 230.3125 271.65625 L 230.3125 292.171875 L 220.894531 292.171875 Z M 220.894531 271.65625 "/><path d="M 251.894531 278.246094 C 251.042969 277.679688 249.867188 277.394531 248.359375 277.394531 C 246.554688 277.394531 245.160156 277.785156 244.171875 278.574219 C 243.183594 279.359375 242.691406 280.472656 242.691406 281.914062 C 242.691406 283.355469 243.183594 284.46875 244.171875 285.253906 C 245.160156 286.042969 246.554688 286.433594 248.359375 286.433594 C 249.914062 286.433594 251.105469 286.132812 251.9375 285.527344 C 252.769531 284.925781 253.242188 284.136719 253.355469 283.164062 L 264.527344 283.164062 C 264.449219 286.492188 263.113281 288.964844 260.511719 290.570312 C 257.914062 292.179688 253.90625 292.988281 248.5 292.988281 C 243.027344 292.988281 238.972656 292.085938 236.332031 290.285156 C 233.695312 288.484375 232.375 285.695312 232.375 281.914062 C 232.375 278.132812 233.695312 275.34375 236.332031 273.542969 C 238.972656 271.742188 243.027344 270.839844 248.5 270.839844 C 253.878906 270.839844 257.871094 271.625 260.476562 273.183594 C 263.082031 274.75 264.414062 277.097656 264.46875 280.230469 L 253.328125 280.230469 C 253.222656 279.472656 252.746094 278.8125 251.894531 278.246094 "/><path d="M 285.761719 278.246094 C 284.90625 277.679688 283.730469 277.394531 282.222656 277.394531 C 280.417969 277.394531 279.023438 277.785156 278.035156 278.574219 C 277.046875 279.359375 276.554688 280.472656 276.554688 281.914062 C 276.554688 283.355469 277.046875 284.46875 278.035156 285.253906 C 279.023438 286.042969 280.417969 286.433594 282.222656 286.433594 C 283.777344 286.433594 284.96875 286.132812 285.800781 285.527344 C 286.632812 284.925781 287.105469 284.136719 287.21875 283.164062 L 298.390625 283.164062 C 298.3125 286.492188 296.976562 288.964844 294.375 290.570312 C 291.777344 292.179688 287.773438 292.988281 282.363281 292.988281 C 276.890625 292.988281 272.835938 292.085938 270.195312 290.285156 C 267.558594 288.484375 266.238281 285.695312 266.238281 281.914062 C 266.238281 278.132812 267.558594 275.34375 270.195312 273.542969 C 272.835938 271.742188 276.890625 270.839844 282.363281 270.839844 C 287.742188 270.839844 291.734375 271.625 294.339844 273.183594 C 296.945312 274.75 298.277344 277.097656 298.332031 280.230469 L 287.191406 280.230469 C 287.085938 279.472656 286.609375 278.8125 285.761719 278.246094 "/><path d="M 300.46875 271.65625 L 309.882812 271.65625 L 309.882812 292.171875 L 300.46875 292.171875 Z M 300.46875 271.65625 "/><path d="M 332.789062 285.261719 C 333.816406 284.480469 334.332031 283.363281 334.332031 281.914062 C 334.332031 280.464844 333.816406 279.347656 332.789062 278.570312 C 331.757812 277.785156 330.261719 277.394531 328.296875 277.394531 C 326.332031 277.394531 324.835938 277.785156 323.808594 278.570312 C 322.777344 279.347656 322.261719 280.464844 322.261719 281.914062 C 322.261719 283.363281 322.777344 284.480469 323.808594 285.261719 C 324.835938 286.042969 326.332031 286.433594 328.296875 286.433594 C 330.261719 286.433594 331.757812 286.042969 332.789062 285.261719 M 340.652344 273.535156 C 343.316406 275.332031 344.644531 278.125 344.644531 281.914062 C 344.644531 285.703125 343.316406 288.496094 340.652344 290.292969 C 337.992188 292.089844 333.871094 292.988281 328.296875 292.988281 C 322.722656 292.988281 318.601562 292.089844 315.941406 290.292969 C 313.277344 288.496094 311.949219 285.703125 311.949219 281.914062 C 311.949219 278.125 313.277344 275.332031 315.941406 273.535156 C 318.601562 271.738281 322.722656 270.839844 328.296875 270.839844 C 333.871094 270.839844 337.992188 271.738281 340.652344 273.535156 "/><path d="M 376.351562 271.65625 L 376.351562 292.171875 L 365.628906 292.171875 L 355.847656 281.746094 L 355.609375 281.746094 L 355.609375 292.171875 L 346.726562 292.171875 L 346.726562 271.65625 L 357.558594 271.65625 L 367.230469 281.929688 L 367.453125 281.929688 L 367.453125 271.65625 Z M 376.351562 271.65625 "/><path d="M 388.222656 279.265625 L 403.925781 279.265625 L 403.925781 283.976562 L 388.222656 283.976562 L 388.222656 286.644531 L 404.960938 286.644531 L 404.960938 292.171875 L 378.804688 292.171875 L 378.804688 271.65625 L 404.738281 271.65625 L 404.738281 276.859375 L 388.222656 276.859375 Z M 388.222656 279.265625 "/></svg></a>
+  <nav class="main" aria-label="Sezioni">
+    <a href="#spiaggia">Spiaggia</a><a href="#meteo">Meteo</a><a href="#ristorante">Ristorante</a><a href="#party">Beach party</a><a href="#spotify">Playlist</a><a href="#privati">Eventi privati</a><a href="#arrivare">Come arrivare</a><a href="#shop">Shop</a>
+  </nav>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span class="sr">Apri il menu</span></button>
+  <div class="lang" role="group" aria-label="Lingua">
+    <button aria-pressed="true">IT</button><button aria-pressed="false">EN</button><button aria-pressed="false">DE</button><button aria-pressed="false">FR</button><button aria-pressed="false">SV</button>
+  </div>
+</header>
+<nav id="mnav" aria-label="Menu" hidden>
+  <ul>
+    <li><a href="#spiaggia">Spiaggia</a></li>
+    <li><a href="#meteo">Meteo</a></li>
+    <li><a href="#ristorante">Ristorante</a></li>
+    <li><a href="#party">Beach party</a></li>
+    <li><a href="#spotify">Le playlist dei dj</a></li>
+    <li><a href="#capodanno">Winter Beach Party</a></li>
+    <li><a href="#privati">Eventi privati</a></li>
+    <li><a href="#arrivare">Come arrivare</a></li>
+    <li><a href="#tour">Samsara on Tour</a></li>
+    <li><a href="#shop">Shop</a></li>
+  </ul>
+  <div class="mnav-cta">
+    <a class="btn solid" href="https://www.spiagge.it/stabilimenti-balneari/28640-samsara-beach-club/">Prenota l'ombrellone</a>
+    <a class="btn" href="#">Prenota un tavolo</a>
+  </div>
+  <div class="lang m" role="group" aria-label="Lingua"><button aria-pressed="true">IT</button><button aria-pressed="false">EN</button><button aria-pressed="false">DE</button><button aria-pressed="false">FR</button><button aria-pressed="false">SV</button></div>
+</nav>
+<div class="concept"><span class="c-lab">Concept, modalità:</span> <span class="mode" role="group" aria-label="Modalità del sito"><button type="button" data-mode="summer" aria-pressed="false">Estate</button><button type="button" data-mode="xmas" aria-pressed="true">Natale</button></span></div>
+
+<div id="clock" aria-hidden="true"><span id="hh">08:00</span><small id="moment">Si apre la spiaggia</small></div>
+
+<a class="wa" href="https://wa.me/393486128016" aria-label="Scrivici su WhatsApp, +39 348 612 8016">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.5.4.1.1.1.7-.1 1.3Z"/></svg>
+  WhatsApp
+</a>
+
+<main>
+  <section id="hero" data-t="0">
+    <p class="tag xm-hide">Beach club a Riccione. Ombrellone, pranzo sul mare, aperitivo e beach party, dalle 8 del mattino alle 10 di sera.</p>
+    <p class="tag xm-only"><span class="greet">Buone feste dal Samsara</span><strong>Winter Beach Party</strong>31 dicembre e 1 gennaio, in spiaggia dalle 12 al tramonto<span class="count" id="count"></span></p>
+    <div class="rise"><h1><span class="sr">Samsara Riccione</span><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="67.4 128.6 459.7 166.4" fill="currentColor"><path d="M 326.921875 138.714844 L 326.921875 130.613281 L 267.628906 130.613281 L 267.628906 189.703125 L 326.921875 189.703125 L 326.921875 145.039062 L 281.863281 145.039062 L 281.863281 175.671875 L 312.492188 175.671875 L 312.492188 159.273438 L 304.589844 159.273438 L 304.589844 167.375 L 289.765625 167.375 L 289.765625 153.140625 L 319.015625 153.140625 L 319.015625 181.800781 L 275.734375 181.800781 L 275.734375 138.714844 Z M 326.921875 138.714844 "/><path d="M 517.703125 247.949219 L 525.121094 247.949219 L 525.121094 237.679688 L 517.703125 237.679688 Z M 517.703125 247.949219 "/><path d="M 525.015625 205.085938 C 525.015625 208.265625 522.460938 210.78125 519.214844 210.78125 C 515.96875 210.78125 513.378906 208.265625 513.378906 205.085938 C 513.378906 201.910156 515.96875 199.425781 519.246094 199.425781 C 522.460938 199.425781 525.015625 201.910156 525.015625 205.085938 M 514.828125 205.085938 C 514.828125 207.609375 516.730469 209.609375 519.246094 209.609375 C 521.699219 209.640625 523.5625 207.609375 523.5625 205.121094 C 523.5625 202.601562 521.699219 200.566406 519.179688 200.566406 C 516.730469 200.566406 514.828125 202.601562 514.828125 205.085938 M 518.316406 208.023438 L 517.003906 208.023438 L 517.003906 202.359375 C 517.519531 202.289062 518.246094 202.1875 519.179688 202.1875 C 520.25 202.1875 520.734375 202.359375 521.117188 202.636719 C 521.457031 202.878906 521.699219 203.292969 521.699219 203.84375 C 521.699219 204.539062 521.179688 204.984375 520.523438 205.191406 L 520.523438 205.257812 C 521.078125 205.433594 521.351562 205.882812 521.527344 206.640625 C 521.699219 207.503906 521.835938 207.8125 521.9375 208.023438 L 520.5625 208.023438 C 520.390625 207.8125 520.285156 207.328125 520.109375 206.640625 C 520.007812 206.054688 519.664062 205.777344 518.941406 205.777344 L 518.316406 205.777344 Z M 518.351562 204.84375 L 518.972656 204.84375 C 519.695312 204.84375 520.285156 204.605469 520.285156 204.015625 C 520.285156 203.5 519.90625 203.152344 519.078125 203.152344 C 518.730469 203.152344 518.492188 203.1875 518.351562 203.222656 Z M 518.351562 204.84375 "/><path d="M 211.777344 221.460938 L 254.171875 221.460938 L 254.171875 247.953125 L 260.882812 247.953125 L 260.882812 215.453125 L 211.777344 215.453125 Z M 211.777344 221.460938 "/><path d="M 226.972656 247.949219 L 234.746094 247.949219 L 234.746094 224.28125 L 226.972656 224.28125 Z M 226.972656 247.949219 "/><path d="M 201.542969 247.949219 L 208.960938 247.949219 L 208.960938 215.453125 L 201.542969 215.453125 Z M 201.542969 247.949219 "/><path d="M 431.863281 215.453125 L 400.070312 215.453125 L 400.070312 247.949219 L 406.082031 247.949219 L 406.082031 221.8125 L 425.152344 221.8125 L 425.152344 227.109375 L 408.890625 227.109375 L 408.890625 233.117188 L 450.230469 233.117188 L 450.230469 247.949219 L 458.710938 247.949219 L 458.710938 227.109375 L 431.863281 227.109375 Z M 431.863281 215.453125 "/><path d="M 274.308594 221.460938 L 326.941406 221.460938 L 326.941406 215.453125 L 267.597656 215.453125 L 267.597656 234.175781 L 274.308594 234.175781 Z M 274.308594 221.460938 "/><path d="M 267.597656 247.949219 L 316.699219 247.949219 L 316.699219 241.59375 L 267.597656 241.59375 Z M 267.597656 247.949219 "/><path d="M 277.136719 234.175781 L 319.523438 234.175781 L 319.523438 247.953125 L 326.941406 247.953125 L 326.941406 227.816406 L 277.136719 227.816406 Z M 277.136719 234.175781 "/><path d="M 75.785156 221.460938 L 128.421875 221.460938 L 128.421875 215.453125 L 69.429688 215.453125 L 69.429688 234.175781 L 75.785156 234.175781 Z M 75.785156 221.460938 "/><path d="M 69.429688 247.949219 L 118.175781 247.949219 L 118.175781 241.59375 L 69.429688 241.59375 Z M 69.429688 247.949219 "/><path d="M 78.617188 234.175781 L 121.003906 234.175781 L 121.003906 247.953125 L 128.421875 247.953125 L 128.421875 227.816406 L 78.617188 227.816406 Z M 78.617188 234.175781 "/><path d="M 393.355469 203.445312 L 333.65625 203.445312 L 333.65625 209.09375 L 393.355469 209.09375 Z M 393.355469 203.445312 "/><path d="M 385.941406 247.949219 L 393.359375 247.949219 L 393.359375 237.695312 L 385.941406 237.695312 Z M 385.941406 247.949219 "/><path d="M 333.65625 215.453125 L 333.65625 247.949219 L 340.371094 247.949219 L 340.371094 221.8125 L 385.9375 221.8125 L 385.9375 227.816406 L 343.179688 227.816406 L 343.179688 234.882812 L 385.9375 234.882812 L 385.9375 234.90625 L 393.351562 234.90625 L 393.351562 215.453125 Z M 333.65625 215.453125 "/><path d="M 525.121094 215.453125 L 465.425781 215.453125 L 465.425781 247.949219 L 472.136719 247.949219 L 472.136719 221.8125 L 517.703125 221.8125 L 517.703125 227.816406 L 474.953125 227.816406 L 474.953125 234.882812 L 525.121094 234.882812 Z M 525.121094 215.453125 "/><path d="M 187.414062 247.949219 L 194.835938 247.949219 L 194.835938 237.710938 L 187.414062 237.710938 Z M 187.414062 247.949219 "/><path d="M 144.65625 234.90625 L 144.65625 227.816406 L 187.414062 227.816406 L 187.414062 221.8125 L 141.847656 221.8125 L 141.847656 247.949219 L 135.132812 247.949219 L 135.132812 215.453125 L 194.832031 215.453125 L 194.832031 234.90625 Z M 144.65625 234.90625 "/><path d="M 208.378906 279.824219 C 208.378906 278.691406 207.710938 278.125 206.371094 278.125 L 198.539062 278.125 L 198.539062 281.507812 L 206.371094 281.507812 C 207.710938 281.507812 208.378906 280.949219 208.378906 279.824219 M 219.410156 292.171875 L 208.503906 292.171875 L 205.195312 286.953125 L 198.539062 286.953125 L 198.539062 292.171875 L 189.125 292.171875 L 189.125 271.65625 L 210.089844 271.65625 C 213.242188 271.65625 215.5 272.242188 216.855469 273.417969 C 218.214844 274.59375 218.890625 276.386719 218.890625 278.800781 C 218.890625 280.558594 218.503906 281.902344 217.738281 282.828125 C 216.972656 283.753906 215.886719 284.390625 214.484375 284.738281 L 214.484375 285.03125 Z M 219.410156 292.171875 "/><path d="M 220.894531 271.65625 L 230.3125 271.65625 L 230.3125 292.171875 L 220.894531 292.171875 Z M 220.894531 271.65625 "/><path d="M 251.894531 278.246094 C 251.042969 277.679688 249.867188 277.394531 248.359375 277.394531 C 246.554688 277.394531 245.160156 277.785156 244.171875 278.574219 C 243.183594 279.359375 242.691406 280.472656 242.691406 281.914062 C 242.691406 283.355469 243.183594 284.46875 244.171875 285.253906 C 245.160156 286.042969 246.554688 286.433594 248.359375 286.433594 C 249.914062 286.433594 251.105469 286.132812 251.9375 285.527344 C 252.769531 284.925781 253.242188 284.136719 253.355469 283.164062 L 264.527344 283.164062 C 264.449219 286.492188 263.113281 288.964844 260.511719 290.570312 C 257.914062 292.179688 253.90625 292.988281 248.5 292.988281 C 243.027344 292.988281 238.972656 292.085938 236.332031 290.285156 C 233.695312 288.484375 232.375 285.695312 232.375 281.914062 C 232.375 278.132812 233.695312 275.34375 236.332031 273.542969 C 238.972656 271.742188 243.027344 270.839844 248.5 270.839844 C 253.878906 270.839844 257.871094 271.625 260.476562 273.183594 C 263.082031 274.75 264.414062 277.097656 264.46875 280.230469 L 253.328125 280.230469 C 253.222656 279.472656 252.746094 278.8125 251.894531 278.246094 "/><path d="M 285.761719 278.246094 C 284.90625 277.679688 283.730469 277.394531 282.222656 277.394531 C 280.417969 277.394531 279.023438 277.785156 278.035156 278.574219 C 277.046875 279.359375 276.554688 280.472656 276.554688 281.914062 C 276.554688 283.355469 277.046875 284.46875 278.035156 285.253906 C 279.023438 286.042969 280.417969 286.433594 282.222656 286.433594 C 283.777344 286.433594 284.96875 286.132812 285.800781 285.527344 C 286.632812 284.925781 287.105469 284.136719 287.21875 283.164062 L 298.390625 283.164062 C 298.3125 286.492188 296.976562 288.964844 294.375 290.570312 C 291.777344 292.179688 287.773438 292.988281 282.363281 292.988281 C 276.890625 292.988281 272.835938 292.085938 270.195312 290.285156 C 267.558594 288.484375 266.238281 285.695312 266.238281 281.914062 C 266.238281 278.132812 267.558594 275.34375 270.195312 273.542969 C 272.835938 271.742188 276.890625 270.839844 282.363281 270.839844 C 287.742188 270.839844 291.734375 271.625 294.339844 273.183594 C 296.945312 274.75 298.277344 277.097656 298.332031 280.230469 L 287.191406 280.230469 C 287.085938 279.472656 286.609375 278.8125 285.761719 278.246094 "/><path d="M 300.46875 271.65625 L 309.882812 271.65625 L 309.882812 292.171875 L 300.46875 292.171875 Z M 300.46875 271.65625 "/><path d="M 332.789062 285.261719 C 333.816406 284.480469 334.332031 283.363281 334.332031 281.914062 C 334.332031 280.464844 333.816406 279.347656 332.789062 278.570312 C 331.757812 277.785156 330.261719 277.394531 328.296875 277.394531 C 326.332031 277.394531 324.835938 277.785156 323.808594 278.570312 C 322.777344 279.347656 322.261719 280.464844 322.261719 281.914062 C 322.261719 283.363281 322.777344 284.480469 323.808594 285.261719 C 324.835938 286.042969 326.332031 286.433594 328.296875 286.433594 C 330.261719 286.433594 331.757812 286.042969 332.789062 285.261719 M 340.652344 273.535156 C 343.316406 275.332031 344.644531 278.125 344.644531 281.914062 C 344.644531 285.703125 343.316406 288.496094 340.652344 290.292969 C 337.992188 292.089844 333.871094 292.988281 328.296875 292.988281 C 322.722656 292.988281 318.601562 292.089844 315.941406 290.292969 C 313.277344 288.496094 311.949219 285.703125 311.949219 281.914062 C 311.949219 278.125 313.277344 275.332031 315.941406 273.535156 C 318.601562 271.738281 322.722656 270.839844 328.296875 270.839844 C 333.871094 270.839844 337.992188 271.738281 340.652344 273.535156 "/><path d="M 376.351562 271.65625 L 376.351562 292.171875 L 365.628906 292.171875 L 355.847656 281.746094 L 355.609375 281.746094 L 355.609375 292.171875 L 346.726562 292.171875 L 346.726562 271.65625 L 357.558594 271.65625 L 367.230469 281.929688 L 367.453125 281.929688 L 367.453125 271.65625 Z M 376.351562 271.65625 "/><path d="M 388.222656 279.265625 L 403.925781 279.265625 L 403.925781 283.976562 L 388.222656 283.976562 L 388.222656 286.644531 L 404.960938 286.644531 L 404.960938 292.171875 L 378.804688 292.171875 L 378.804688 271.65625 L 404.738281 271.65625 L 404.738281 276.859375 L 388.222656 276.859375 Z M 388.222656 279.265625 "/></svg></h1></div>
+    <div class="reflect" aria-hidden="true"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="67.4 128.6 459.7 166.4" fill="currentColor"><path d="M 326.921875 138.714844 L 326.921875 130.613281 L 267.628906 130.613281 L 267.628906 189.703125 L 326.921875 189.703125 L 326.921875 145.039062 L 281.863281 145.039062 L 281.863281 175.671875 L 312.492188 175.671875 L 312.492188 159.273438 L 304.589844 159.273438 L 304.589844 167.375 L 289.765625 167.375 L 289.765625 153.140625 L 319.015625 153.140625 L 319.015625 181.800781 L 275.734375 181.800781 L 275.734375 138.714844 Z M 326.921875 138.714844 "/><path d="M 517.703125 247.949219 L 525.121094 247.949219 L 525.121094 237.679688 L 517.703125 237.679688 Z M 517.703125 247.949219 "/><path d="M 525.015625 205.085938 C 525.015625 208.265625 522.460938 210.78125 519.214844 210.78125 C 515.96875 210.78125 513.378906 208.265625 513.378906 205.085938 C 513.378906 201.910156 515.96875 199.425781 519.246094 199.425781 C 522.460938 199.425781 525.015625 201.910156 525.015625 205.085938 M 514.828125 205.085938 C 514.828125 207.609375 516.730469 209.609375 519.246094 209.609375 C 521.699219 209.640625 523.5625 207.609375 523.5625 205.121094 C 523.5625 202.601562 521.699219 200.566406 519.179688 200.566406 C 516.730469 200.566406 514.828125 202.601562 514.828125 205.085938 M 518.316406 208.023438 L 517.003906 208.023438 L 517.003906 202.359375 C 517.519531 202.289062 518.246094 202.1875 519.179688 202.1875 C 520.25 202.1875 520.734375 202.359375 521.117188 202.636719 C 521.457031 202.878906 521.699219 203.292969 521.699219 203.84375 C 521.699219 204.539062 521.179688 204.984375 520.523438 205.191406 L 520.523438 205.257812 C 521.078125 205.433594 521.351562 205.882812 521.527344 206.640625 C 521.699219 207.503906 521.835938 207.8125 521.9375 208.023438 L 520.5625 208.023438 C 520.390625 207.8125 520.285156 207.328125 520.109375 206.640625 C 520.007812 206.054688 519.664062 205.777344 518.941406 205.777344 L 518.316406 205.777344 Z M 518.351562 204.84375 L 518.972656 204.84375 C 519.695312 204.84375 520.285156 204.605469 520.285156 204.015625 C 520.285156 203.5 519.90625 203.152344 519.078125 203.152344 C 518.730469 203.152344 518.492188 203.1875 518.351562 203.222656 Z M 518.351562 204.84375 "/><path d="M 211.777344 221.460938 L 254.171875 221.460938 L 254.171875 247.953125 L 260.882812 247.953125 L 260.882812 215.453125 L 211.777344 215.453125 Z M 211.777344 221.460938 "/><path d="M 226.972656 247.949219 L 234.746094 247.949219 L 234.746094 224.28125 L 226.972656 224.28125 Z M 226.972656 247.949219 "/><path d="M 201.542969 247.949219 L 208.960938 247.949219 L 208.960938 215.453125 L 201.542969 215.453125 Z M 201.542969 247.949219 "/><path d="M 431.863281 215.453125 L 400.070312 215.453125 L 400.070312 247.949219 L 406.082031 247.949219 L 406.082031 221.8125 L 425.152344 221.8125 L 425.152344 227.109375 L 408.890625 227.109375 L 408.890625 233.117188 L 450.230469 233.117188 L 450.230469 247.949219 L 458.710938 247.949219 L 458.710938 227.109375 L 431.863281 227.109375 Z M 431.863281 215.453125 "/><path d="M 274.308594 221.460938 L 326.941406 221.460938 L 326.941406 215.453125 L 267.597656 215.453125 L 267.597656 234.175781 L 274.308594 234.175781 Z M 274.308594 221.460938 "/><path d="M 267.597656 247.949219 L 316.699219 247.949219 L 316.699219 241.59375 L 267.597656 241.59375 Z M 267.597656 247.949219 "/><path d="M 277.136719 234.175781 L 319.523438 234.175781 L 319.523438 247.953125 L 326.941406 247.953125 L 326.941406 227.816406 L 277.136719 227.816406 Z M 277.136719 234.175781 "/><path d="M 75.785156 221.460938 L 128.421875 221.460938 L 128.421875 215.453125 L 69.429688 215.453125 L 69.429688 234.175781 L 75.785156 234.175781 Z M 75.785156 221.460938 "/><path d="M 69.429688 247.949219 L 118.175781 247.949219 L 118.175781 241.59375 L 69.429688 241.59375 Z M 69.429688 247.949219 "/><path d="M 78.617188 234.175781 L 121.003906 234.175781 L 121.003906 247.953125 L 128.421875 247.953125 L 128.421875 227.816406 L 78.617188 227.816406 Z M 78.617188 234.175781 "/><path d="M 393.355469 203.445312 L 333.65625 203.445312 L 333.65625 209.09375 L 393.355469 209.09375 Z M 393.355469 203.445312 "/><path d="M 385.941406 247.949219 L 393.359375 247.949219 L 393.359375 237.695312 L 385.941406 237.695312 Z M 385.941406 247.949219 "/><path d="M 333.65625 215.453125 L 333.65625 247.949219 L 340.371094 247.949219 L 340.371094 221.8125 L 385.9375 221.8125 L 385.9375 227.816406 L 343.179688 227.816406 L 343.179688 234.882812 L 385.9375 234.882812 L 385.9375 234.90625 L 393.351562 234.90625 L 393.351562 215.453125 Z M 333.65625 215.453125 "/><path d="M 525.121094 215.453125 L 465.425781 215.453125 L 465.425781 247.949219 L 472.136719 247.949219 L 472.136719 221.8125 L 517.703125 221.8125 L 517.703125 227.816406 L 474.953125 227.816406 L 474.953125 234.882812 L 525.121094 234.882812 Z M 525.121094 215.453125 "/><path d="M 187.414062 247.949219 L 194.835938 247.949219 L 194.835938 237.710938 L 187.414062 237.710938 Z M 187.414062 247.949219 "/><path d="M 144.65625 234.90625 L 144.65625 227.816406 L 187.414062 227.816406 L 187.414062 221.8125 L 141.847656 221.8125 L 141.847656 247.949219 L 135.132812 247.949219 L 135.132812 215.453125 L 194.832031 215.453125 L 194.832031 234.90625 Z M 144.65625 234.90625 "/><path d="M 208.378906 279.824219 C 208.378906 278.691406 207.710938 278.125 206.371094 278.125 L 198.539062 278.125 L 198.539062 281.507812 L 206.371094 281.507812 C 207.710938 281.507812 208.378906 280.949219 208.378906 279.824219 M 219.410156 292.171875 L 208.503906 292.171875 L 205.195312 286.953125 L 198.539062 286.953125 L 198.539062 292.171875 L 189.125 292.171875 L 189.125 271.65625 L 210.089844 271.65625 C 213.242188 271.65625 215.5 272.242188 216.855469 273.417969 C 218.214844 274.59375 218.890625 276.386719 218.890625 278.800781 C 218.890625 280.558594 218.503906 281.902344 217.738281 282.828125 C 216.972656 283.753906 215.886719 284.390625 214.484375 284.738281 L 214.484375 285.03125 Z M 219.410156 292.171875 "/><path d="M 220.894531 271.65625 L 230.3125 271.65625 L 230.3125 292.171875 L 220.894531 292.171875 Z M 220.894531 271.65625 "/><path d="M 251.894531 278.246094 C 251.042969 277.679688 249.867188 277.394531 248.359375 277.394531 C 246.554688 277.394531 245.160156 277.785156 244.171875 278.574219 C 243.183594 279.359375 242.691406 280.472656 242.691406 281.914062 C 242.691406 283.355469 243.183594 284.46875 244.171875 285.253906 C 245.160156 286.042969 246.554688 286.433594 248.359375 286.433594 C 249.914062 286.433594 251.105469 286.132812 251.9375 285.527344 C 252.769531 284.925781 253.242188 284.136719 253.355469 283.164062 L 264.527344 283.164062 C 264.449219 286.492188 263.113281 288.964844 260.511719 290.570312 C 257.914062 292.179688 253.90625 292.988281 248.5 292.988281 C 243.027344 292.988281 238.972656 292.085938 236.332031 290.285156 C 233.695312 288.484375 232.375 285.695312 232.375 281.914062 C 232.375 278.132812 233.695312 275.34375 236.332031 273.542969 C 238.972656 271.742188 243.027344 270.839844 248.5 270.839844 C 253.878906 270.839844 257.871094 271.625 260.476562 273.183594 C 263.082031 274.75 264.414062 277.097656 264.46875 280.230469 L 253.328125 280.230469 C 253.222656 279.472656 252.746094 278.8125 251.894531 278.246094 "/><path d="M 285.761719 278.246094 C 284.90625 277.679688 283.730469 277.394531 282.222656 277.394531 C 280.417969 277.394531 279.023438 277.785156 278.035156 278.574219 C 277.046875 279.359375 276.554688 280.472656 276.554688 281.914062 C 276.554688 283.355469 277.046875 284.46875 278.035156 285.253906 C 279.023438 286.042969 280.417969 286.433594 282.222656 286.433594 C 283.777344 286.433594 284.96875 286.132812 285.800781 285.527344 C 286.632812 284.925781 287.105469 284.136719 287.21875 283.164062 L 298.390625 283.164062 C 298.3125 286.492188 296.976562 288.964844 294.375 290.570312 C 291.777344 292.179688 287.773438 292.988281 282.363281 292.988281 C 276.890625 292.988281 272.835938 292.085938 270.195312 290.285156 C 267.558594 288.484375 266.238281 285.695312 266.238281 281.914062 C 266.238281 278.132812 267.558594 275.34375 270.195312 273.542969 C 272.835938 271.742188 276.890625 270.839844 282.363281 270.839844 C 287.742188 270.839844 291.734375 271.625 294.339844 273.183594 C 296.945312 274.75 298.277344 277.097656 298.332031 280.230469 L 287.191406 280.230469 C 287.085938 279.472656 286.609375 278.8125 285.761719 278.246094 "/><path d="M 300.46875 271.65625 L 309.882812 271.65625 L 309.882812 292.171875 L 300.46875 292.171875 Z M 300.46875 271.65625 "/><path d="M 332.789062 285.261719 C 333.816406 284.480469 334.332031 283.363281 334.332031 281.914062 C 334.332031 280.464844 333.816406 279.347656 332.789062 278.570312 C 331.757812 277.785156 330.261719 277.394531 328.296875 277.394531 C 326.332031 277.394531 324.835938 277.785156 323.808594 278.570312 C 322.777344 279.347656 322.261719 280.464844 322.261719 281.914062 C 322.261719 283.363281 322.777344 284.480469 323.808594 285.261719 C 324.835938 286.042969 326.332031 286.433594 328.296875 286.433594 C 330.261719 286.433594 331.757812 286.042969 332.789062 285.261719 M 340.652344 273.535156 C 343.316406 275.332031 344.644531 278.125 344.644531 281.914062 C 344.644531 285.703125 343.316406 288.496094 340.652344 290.292969 C 337.992188 292.089844 333.871094 292.988281 328.296875 292.988281 C 322.722656 292.988281 318.601562 292.089844 315.941406 290.292969 C 313.277344 288.496094 311.949219 285.703125 311.949219 281.914062 C 311.949219 278.125 313.277344 275.332031 315.941406 273.535156 C 318.601562 271.738281 322.722656 270.839844 328.296875 270.839844 C 333.871094 270.839844 337.992188 271.738281 340.652344 273.535156 "/><path d="M 376.351562 271.65625 L 376.351562 292.171875 L 365.628906 292.171875 L 355.847656 281.746094 L 355.609375 281.746094 L 355.609375 292.171875 L 346.726562 292.171875 L 346.726562 271.65625 L 357.558594 271.65625 L 367.230469 281.929688 L 367.453125 281.929688 L 367.453125 271.65625 Z M 376.351562 271.65625 "/><path d="M 388.222656 279.265625 L 403.925781 279.265625 L 403.925781 283.976562 L 388.222656 283.976562 L 388.222656 286.644531 L 404.960938 286.644531 L 404.960938 292.171875 L 378.804688 292.171875 L 378.804688 271.65625 L 404.738281 271.65625 L 404.738281 276.859375 L 388.222656 276.859375 Z M 388.222656 279.265625 "/></svg></div>
+    <div class="actions hero-cta xm-hide">
+      <a class="btn solid" href="https://www.spiagge.it/stabilimenti-balneari/28640-samsara-beach-club/">Prenota l'ombrellone</a>
+      <a class="btn" href="#party">Vedi i prossimi party</a>
+    </div>
+    <div class="actions hero-cta xm-only">
+      <a class="btn solid" href="https://www.riccionenotte.com/">Prenota il pacchetto, 129 €</a>
+      <a class="btn" href="#capodanno">Scopri il Winter Beach Party</a>
+    </div>
+  </section>
+
+  <section class="hour" id="spiaggia">
+    <div>
+      <p class="when">Dalle 8:00</p>
+      <h2>La giornata comincia in prima fila.</h2>
+      <p>Ombrelloni e lettini con servizio in spiaggia, docce, Wi‑Fi e musica a volume da mattina. Prenoti online, scegli la fila e arrivi quando vuoi.</p>
+      <p class="xm-only season">Siamo chiusi per l'inverno: riapriamo a Pasqua 2027. Gli ombrelloni si prenotano da primavera.</p>
+      <div class="actions"><a class="btn solid" href="https://www.spiagge.it/stabilimenti-balneari/28640-samsara-beach-club/">Prenota l'ombrellone <small>su Spiagge.it</small></a></div>
+    </div>
+  </section>
+
+  <section id="meteo" aria-labelledby="meteo-h">
+    <div class="meteo-head">
+      <h2 id="meteo-h">Che tempo fa a Riccione</h2>
+      <p id="meteo-note">Previsioni dei prossimi 7 giorni sulla spiaggia del Samsara.</p>
+    </div>
+    <ol class="meteo-days" id="meteo-days"></ol>
+  </section>
+
+  <section id="ristorante">
+    <div class="food-sticky">
+      <div class="food-text">
+        <p class="when">Dalle 12:30</p>
+        <h2>Pranzo al ristorante o sotto l'ombrellone.</h2>
+        <p>Cucina di mare, pasta fresca e piadine, con una carta di vini e cocktail pensata per la spiaggia. Se non vuoi alzarti dal lettino, il pranzo te lo portiamo noi.</p>
+        <p class="dish" aria-live="polite"><span id="dish-name">Tagliolini alle vongole</span></p>
+        <div class="actions">
+          <a class="btn solid" href="#">Prenota un tavolo <small>su TheFork</small></a>
+          <a class="btn" href="#">Menu completo</a>
+        </div>
+      </div>
+      <div class="wheel-wrap" aria-hidden="true"><div class="wheel" id="wheel">
+        <img src="img/f05-vongole.webp" data-name="Tagliolini alle vongole" alt="">
+        <img src="img/f07-polpo.webp" data-name="Polpo arrosto, peperoni e stracciatella" alt="">
+        <img src="img/f04-ravioli.webp" data-name="Ravioli con crema di crostacei e gamberi" alt="">
+        <img src="img/f01-salmone.webp" data-name="Salmone marinato, stracciatella e crostini" alt="">
+        <img src="img/f06-kataifi.webp" data-name="Gamberi in kataifi" alt="">
+        <img src="img/f02-nero.webp" data-name="Tagliolini al nero, piselli e stracciatella" alt="">
+        <img src="img/f03-fritto.webp" data-name="Fritto misto dell'Adriatico" alt="">
+        <img src="img/f08-taco.webp" data-name="Taco di tonno" alt="">
+        <img src="img/f09-burrata.webp" data-name="Burratine con pomodoro e olive" alt="">
+        <img src="img/f10-piadina.webp" data-name="Piadina crudo e rucola" alt="">
+      </div></div>
+    </div>
+  </section>
+
+  <section class="hour split" id="aperitivo">
+    <div>
+      <p class="when">Dalle 18:00</p>
+      <h2>Il sole scende, la musica sale.</h2>
+      <p>Spritz, cocktail firmati e dj set al tramonto, tra palme, verde e fumi colorati. È il momento in cui la spiaggia diventa un club.</p>
+    </div>
+    <figure class="ph tall vid"><video src="img/v1.mp4" poster="img/v1.webp" muted loop playsinline preload="metadata" aria-label="Video: dj in consolle con i getti di CO2 sulla pista al tramonto"></video></figure>
+  </section>
+
+  <section class="hour split" id="party">
+    <div>
+      <p class="when">Fino alle 22:00</p>
+      <h2>BEACH PARTY</h2>
+      <p>Dj, vocalist, gonfiabili giganti e getti di CO2, dal pomeriggio fino alle 22. Prenota il tavolo o compra il biglietto prima che finiscano.</p>
+      <ul class="dates">
+        <li><time>sab 5.6</time><span>Opening party 2027</span><a href="#">Biglietti</a></li>
+        <li><time>sab 19.6</time><span>Samsara Sunset Session</span><a href="#">Biglietti</a></li>
+        <li><time>sab 3.7</time><span>Guest dj da annunciare</span><a href="#">Biglietti</a></li>
+        <li><time>sab 14.8</time><span>Ferragosto on the beach</span><a href="#">Biglietti</a></li>
+      </ul>
+      <p class="note">Date di esempio. Nel sito vero lo staff le inserisce dal pannello e i biglietti si aprono su Ticketnation.</p>
+      <div class="actions"><a class="btn solid" href="#">Prenota un tavolo <small>su Ticketnation</small></a></div>
+    </div>
+    <figure class="ph tall vid"><video src="img/v3.mp4" poster="img/v3.webp" muted loop playsinline preload="metadata" aria-label="Video: beach party al tramonto con luci, fumi e gonfiabili giganti"></video></figure>
+  </section>
+
+  <section id="reel" aria-label="Foto dei beach party">
+    <div class="reel-sticky">
+      <h2>Un sabato al Samsara.</h2>
+      <div class="reel-track">
+        <img src="img/p05.webp" alt="Vista dalla consolle sulla pista piena al tramonto" loading="lazy">
+        <img src="img/p06.webp" alt="Balena gonfiabile sopra la folla che balla" loading="lazy">
+        <img src="img/p07.webp" alt="Funghi giganti e arcobaleno sul palco del beach party" loading="lazy">
+        <img src="img/p01.webp" alt="Pista piena con ledwall, palme e getti di CO2" loading="lazy">
+        <video class="r-vid" src="img/v2.mp4" poster="img/v2.webp" muted loop playsinline preload="metadata" aria-label="Video: performer in rosa e folla che balla"></video>
+        <img src="img/p02.webp" alt="Fumi colorati sopra la pista" loading="lazy">
+        <img src="img/p03.webp" alt="Ragazze al tramonto davanti alla struttura Samsara" loading="lazy">
+        <img src="img/p04.webp" alt="Vocalist sul palco con i getti di CO2 sulla folla" loading="lazy">
+        <img src="img/p09.webp" alt="Ferragosto Day: polpo gonfiabile e pista vista dalla consolle" loading="lazy">
+        <img src="img/p08.webp" alt="Ragazze che ballano con i drink in mano" loading="lazy">
+        <img src="img/p10.webp" alt="Braccia alzate sotto il ledwall" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section id="spotify" aria-labelledby="spotify-h">
+    <div class="sp-head">
+      <h2 id="spotify-h">Il suono del Samsara</h2>
+      <p>Una playlist per ogni ora della giornata, firmata dai nostri dj. Portati la spiaggia in cuffia: in viaggio verso Riccione o quando l'estate è finita.</p>
+      <p class="note">Playlist e copertine di esempio: quelle vere arriveranno collegate a Spotify.</p>
+    </div>
+    <ul class="discs"><li><button class="disc" type="button" data-pl="Morning Chill">
+      <span class="sleeve c1" aria-hidden="true">
+        <span class="vinyl"><img src="img/p03.webp" alt="" loading="lazy" width="420" height="420"></span>
+        <span class="cover"><img src="img/p03.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">08:00</span><span class="cv-t">Morning Chill</span><span class="cv-d">Samsara Beach</span></span>
+      </span>
+      <span class="meta"><strong>Morning Chill</strong><span>Samsara Beach</span><small>32 brani, 1 h 54 min</small></span>
+    </button></li><li><button class="disc" type="button" data-pl="Lunch on the Beach">
+      <span class="sleeve c2" aria-hidden="true">
+        <span class="vinyl"><img src="img/a-domme.webp" alt="" loading="lazy" width="420" height="420"></span>
+        <span class="cover"><img src="img/a-domme.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">13:00</span><span class="cv-t">Lunch on the Beach</span><span class="cv-d">Fabio Marzo & Domme</span></span>
+      </span>
+      <span class="meta"><strong>Lunch on the Beach</strong><span>Fabio Marzo & Domme</span><small>28 brani, 1 h 41 min</small></span>
+    </button></li><li><button class="disc" type="button" data-pl="Brass on the Beach">
+      <span class="sleeve c3" aria-hidden="true">
+        <span class="vinyl"><img src="img/a-gabriele-blandini.webp" alt="" loading="lazy" width="420" height="420"></span>
+        <span class="cover"><img src="img/a-gabriele-blandini.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">17:30</span><span class="cv-t">Brass on the Beach</span><span class="cv-d">Gabriele Blandini</span></span>
+      </span>
+      <span class="meta"><strong>Brass on the Beach</strong><span>Gabriele Blandini</span><small>22 brani, 1 h 18 min</small></span>
+    </button></li><li><button class="disc" type="button" data-pl="Afro Sunset">
+      <span class="sleeve c4" aria-hidden="true">
+        <span class="vinyl"><img src="img/a-cristina-oliveira.webp" alt="" loading="lazy" width="420" height="420"></span>
+        <span class="cover"><img src="img/a-cristina-oliveira.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">18:30</span><span class="cv-t">Afro Sunset</span><span class="cv-d">Cristina Oliveira</span></span>
+      </span>
+      <span class="meta"><strong>Afro Sunset</strong><span>Cristina Oliveira</span><small>26 brani, 1 h 47 min</small></span>
+    </button></li><li><button class="disc" type="button" data-pl="Beach Party Anthems">
+      <span class="sleeve c5" aria-hidden="true">
+        <span class="vinyl"><img src="img/a-danilo-secli.webp" alt="" loading="lazy" width="420" height="420"></span>
+        <span class="cover"><img src="img/a-danilo-secli.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">19:30</span><span class="cv-t">Beach Party Anthems</span><span class="cv-d">Danilo Seclì</span></span>
+      </span>
+      <span class="meta"><strong>Beach Party Anthems</strong><span>Danilo Seclì</span><small>40 brani, 2 h 36 min</small></span>
+    </button></li><li><button class="disc" type="button" data-pl="After Sunset">
+      <span class="sleeve c6" aria-hidden="true">
+        <span class="vinyl"><img src="img/a-marco-giorgino.webp" alt="" loading="lazy" width="420" height="420"></span>
+        <span class="cover"><img src="img/a-marco-giorgino.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">21:00</span><span class="cv-t">After Sunset</span><span class="cv-d">Marco Giorgino</span></span>
+      </span>
+      <span class="meta"><strong>After Sunset</strong><span>Marco Giorgino</span><small>30 brani, 2 h 05 min</small></span>
+    </button></li></ul>
+    <p class="sp-msg" role="status"></p>
+    <a class="btn sp-all" href="https://open.spotify.com/search/Samsara%20Beach/playlists" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1ED760"/><path d="M6.5 9.3c3.8-1.1 8-.8 11.2 1M7.2 12.4c3.1-.9 6.6-.6 9.3.9M7.8 15.3c2.5-.6 5.1-.4 7.2.7" stroke="#0E0A2E" stroke-width="1.7" fill="none" stroke-linecap="round"/></svg>Segui Samsara Beach su Spotify</a>
+  </section>
+
+</main>
+
+<section class="night capodanno" id="capodanno">
+  <div class="snow" aria-hidden="true"></div>
+  <div class="grid2">
+    <div>
+      <p class="when" style="color:#F3EEFF">31 dicembre e 1 gennaio</p>
+      <h2>Winter Beach Party</h2>
+      <p>I due giorni d'inverno in cui riapriamo. Beach party di giorno, dalle 12 al tramonto, sulla sabbia di Riccione.</p>
+      <div class="pack">
+        <p><strong>Pacchetto ufficiale Riccione Notte</strong></p>
+        <p>2 notti in hotel, ingresso al beach party Samsara e 2 drink.</p>
+        <p class="price">129 €</p>
+      </div>
+      <div class="actions"><a class="btn" href="https://www.riccionenotte.com/" style="color:#fff">Prenota il pacchetto <small>su Riccione Notte</small></a></div>
+    </div>
+    <figure class="ph poster"><img src="img/winter.webp" width="975" height="1300" alt="Poster Winter Beach Party Samsara, 31 dicembre e 1 gennaio" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="night" id="arrivare">
+  <div class="grid2">
+    <div>
+      <h2>Arrivi in aereo? Siamo a dieci minuti dal Fellini.</h2>
+      <p>L'aeroporto di Rimini è a pochi chilometri da Samsara. Nel 2027 arrivano voli diretti da tutta Europa: ogni città avrà la sua guida con transfer, orari e cosa fare.</p>
+      <div class="cities" aria-label="Città con volo diretto per Rimini">
+        <span>London</span><span>Manchester</span><span class="new">Dublin</span><span>Köln</span><span class="new">Memmingen</span><span class="new">Berlin</span><span>Wien</span><span>Basel</span><span class="new">Stockholm</span><span class="new">Warszawa</span><span>Kraków</span><span>Wrocław</span><span>Katowice</span><span>Praha</span><span>Budapest</span><span>Kaunas</span><span>Luxembourg</span>
+      </div>
+      <p class="legend">In viola le rotte nuove dell'estate 2027.</p>
+    </div>
+    <div>
+      <h2>Viale D'Annunzio 150, Riccione</h2>
+      <p>Zona Marano, sul lungomare. Aperti tutti i giorni da Pasqua a metà settembre, dalle 8:00 alle 22:00.</p>
+      <div class="actions"><a class="btn" style="color:#fff" href="https://www.google.com/maps/search/?api=1&query=Viale+Gabriele+D'Annunzio+150+Riccione">Apri in Google Maps</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="night" id="privati">
+  <div class="grid2">
+    <div>
+      <h2>Una festa tutta tua, sulla sabbia.</h2>
+      <p>Addii al celibato e al nubilato, compleanni, eventi aziendali, lanci di prodotto. Di giorno o di sera, con cena, dj e spiaggia riservata.</p>
+    </div>
+    <form id="f-privati">
+      <div class="row">
+        <label>Nome<input name="nome" required autocomplete="name"></label>
+        <label>Telefono<input name="tel" type="tel" required autocomplete="tel"></label>
+      </div>
+      <div class="row">
+        <label>Tipo di evento<select name="tipo"><option>Addio al celibato / nubilato</option><option>Compleanno</option><option>Evento aziendale</option><option>Altro</option></select></label>
+        <label>Persone<input name="persone" type="number" min="10" placeholder="30"></label>
+      </div>
+      <label>Data e dettagli<textarea name="msg" placeholder="Data indicativa, orario, cosa avete in mente"></textarea></label>
+      <button class="btn" type="submit">Invia la richiesta</button>
+      <p class="ok" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section class="tour" id="tour">
+  <div class="tour-head">
+    <h2>Samsara on Tour <span>26/27</span></h2>
+    <p>La tua notte d'estate, d'inverno. Gli stessi artisti che fanno ballare Riccione, Gallipoli e Budva arrivano nel tuo club, con i nostri format e la promozione sui canali social Samsara prima e durante la serata.</p>
+  </div>
+  <div class="stats">
+    <div><strong>80</strong>club in Italia ed Europa nella stagione 25/26</div>
+    <div><strong>2.000</strong>persone in media a ogni tappa</div>
+    <div><strong>150.000</strong>km percorsi per raggiungere i beach lovers</div>
+    <div><strong>1 milione</strong>di utenti raggiunti sui social per ogni tappa</div>
+  </div>
+  <div class="ticker" aria-label="Alcune tappe richieste per la stagione 26/27"><div class="ticker-track"><span>Mantova</span><span>Roma</span><span>Foggia</span><span>San Bonifacio</span><span>Perugia</span><span>Lugano</span><span>Bolognola</span><span>Brescia</span><span>Ferrara</span><span>Soncino</span><span>Ariano Irpino</span><span>Pescara</span><span>Viterbo</span><span>Campobasso</span><span>Teramo</span><span>Milano</span><span>Pavia</span><span>L'Aquila</span><span>Arezzo</span><span>San Benedetto del Tronto</span><span>Mantova</span><span>Roma</span><span>Foggia</span><span>San Bonifacio</span><span>Perugia</span><span>Lugano</span><span>Bolognola</span><span>Brescia</span><span>Ferrara</span><span>Soncino</span><span>Ariano Irpino</span><span>Pescara</span><span>Viterbo</span><span>Campobasso</span><span>Teramo</span><span>Milano</span><span>Pavia</span><span>L'Aquila</span><span>Arezzo</span><span>San Benedetto del Tronto</span></div></div>
+  <p class="ticker-note">Già più di 50 club ci hanno chiesto una tappa per la stagione 26/27. Date in aggiornamento.</p>
+  <h3>Gli artisti in tour</h3>
+  <div class="artists"><figure><img src="img/a-danilo-secli.webp" alt="Danilo Seclì, Dj" width="420" height="315"><figcaption><strong>Danilo Seclì</strong>Dj</figcaption></figure><figure><img src="img/a-marco-giorgino.webp" alt="Marco Giorgino, Dj" width="420" height="315"><figcaption><strong>Marco Giorgino</strong>Dj</figcaption></figure><figure><img src="img/a-cristina-oliveira.webp" alt="Cristina Oliveira, Dj" width="420" height="315"><figcaption><strong>Cristina Oliveira</strong>Dj</figcaption></figure><figure><img src="img/a-fabio-marzo.webp" alt="Fabio Marzo, Vocalist" width="420" height="315"><figcaption><strong>Fabio Marzo</strong>Vocalist</figcaption></figure><figure><img src="img/a-domme.webp" alt="Domme, Vocalist" width="420" height="315"><figcaption><strong>Domme</strong>Vocalist</figcaption></figure><figure><img src="img/a-gabriele-blandini.webp" alt="Gabriele Blandini, Tromba" width="420" height="315"><figcaption><strong>Gabriele Blandini</strong>Tromba</figcaption></figure></div>
+  <div class="tour-cta">
+    <div>
+      <h3>Porta il Samsara nel tuo club</h3>
+      <p>Info e booking: tour@samsarabeach.it, +39 349 226 4327</p>
+    </div>
+    <div class="actions" style="margin-top:0">
+      <a class="btn tour-btn" href="mailto:tour@samsarabeach.it?subject=Richiesta%20tappa%20Samsara%20on%20Tour">Richiedi una tappa</a>
+      <a class="btn" href="https://www.instagram.com/samsaratour/" style="color:#fff">@samsaratour</a>
+    </div>
+  </div>
+</section>
+
+<section class="night" id="shop">
+  <div class="grid2">
+    <div>
+      <h2>Shop</h2>
+      <p>Costumi, teli, cappellini e la t‑shirt della stagione. Ordini online, ritiri in spiaggia o ricevi a casa.</p>
+      <div class="actions"><a class="btn" style="color:#fff" href="#">Vai allo shop</a></div>
+    </div>
+    <div>
+      <h2>Newsletter</h2>
+      <p>Date dei party e prevendite prima di tutti.</p>
+      <form id="f-news" style="grid-template-columns:1fr auto;align-items:end">
+        <label>Email<input type="email" required autocomplete="email"></label>
+        <button class="btn" type="submit">Iscriviti</button>
+        <p class="ok" role="status" style="grid-column:1/-1"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="xm-only xm-bye" aria-label="Auguri">
+  <span class="orn" aria-hidden="true"></span>
+  <p class="bye-big">Buone feste</p>
+  <p class="bye-small">Dalla spiaggia di Riccione, ci vediamo il 31 dicembre sulla sabbia.</p>
+  <a class="btn" href="https://www.riccionenotte.com/">Regala il Winter Beach Party</a>
+</section>
+<footer>
+  <div>
+    <strong>SAMSARA</strong>
+    Samsara Beach Club, Viale Gabriele D'Annunzio 150, 47838 Riccione (RN)<br>
+    Nirvana S.r.l. · P.IVA da inserire<br>
+    Tel. +39 348 612 8016 · ufficio@samsarabeach.it
+  </div>
+  <div>
+    <a href="#">Instagram</a><a href="#">TikTok</a><a href="https://open.spotify.com/search/Samsara%20Beach/playlists">Spotify</a><a href="#">Facebook</a>
+  </div>
+  <div>
+    <a href="https://www.samsarabeach.it/">Samsara Beach (brand)</a><a href="#">Privacy</a><a href="#">Cookie</a>
+  </div>
+</footer>
+
+<script>
+// weekly weather: live from Open-Meteo on the real site, embedded snapshot as fallback
+(() => {
+  const box = document.getElementById('meteo-days'), note = document.getElementById('meteo-note');
+  const SNAP = {date:'30 ottobre 2026', days:[
+    ['2026-10-30',17,13,30],['2026-10-31',16,13,15],['2026-11-01',13,11,65],['2026-11-02',15,13,55],
+    ['2026-11-03',14,11,15],['2026-11-04',13,11,30],['2026-11-05',14,10,15]]};
+  const icon = k => ({
+    sun:'<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="10" fill="#FFC21A"/><g stroke="#FFC21A" stroke-width="3" stroke-linecap="round">'+[0,45,90,135,180,225,270,315].map(a=>`<line x1="26" y1="7" x2="26" y2="11" transform="rotate(${a} 26 26)"/>`).join('')+'</g></svg>',
+    part:'<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="20" cy="19" r="9" fill="#FFC21A"/><path d="M17 40h22a8 8 0 0 0 0-16 11 11 0 0 0-21 3 7 7 0 0 0-1 13Z" fill="#fff" stroke="#C9D6E3" stroke-width="1.5"/></svg>',
+    cloud:'<svg viewBox="0 0 52 52" aria-hidden="true"><path d="M14 38h24a9 9 0 0 0 0-18 12 12 0 0 0-23 3 7.5 7.5 0 0 0-1 15Z" fill="#E8EEF4" stroke="#B8C6D4" stroke-width="1.5"/></svg>',
+    rain:'<svg viewBox="0 0 52 52" aria-hidden="true"><path d="M14 31h24a9 9 0 0 0 0-18 12 12 0 0 0-23 3 7.5 7.5 0 0 0-1 15Z" fill="#DCE4EC" stroke="#A9B8C7" stroke-width="1.5"/><g stroke="#3F8FDD" stroke-width="3" stroke-linecap="round"><line x1="18" y1="37" x2="16" y2="43"/><line x1="27" y1="37" x2="25" y2="43"/><line x1="36" y1="37" x2="34" y2="43"/></g></svg>',
+    storm:'<svg viewBox="0 0 52 52" aria-hidden="true"><path d="M14 31h24a9 9 0 0 0 0-18 12 12 0 0 0-23 3 7.5 7.5 0 0 0-1 15Z" fill="#C5CFD9" stroke="#97A6B5" stroke-width="1.5"/><path d="M27 33l-6 9h6l-3 7 9-11h-6l3-5Z" fill="#FFC21A"/></svg>'})[k];
+  const label = {sun:'Sereno',part:'Poco nuvoloso',cloud:'Nuvoloso',rain:'Pioggia',storm:'Temporale'};
+  const fromCode = c => c<=1?'sun':c<=2?'part':c<=48?'cloud':c<95?'rain':'storm';
+  const fromRain = p => p>=50?'rain':p>=30?'part':'sun';
+  const dn = ['dom','lun','mar','mer','gio','ven','sab'], mn = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  function render(days, live) {
+    box.innerHTML = days.map((d,i) => {
+      const dt = new Date(d.date+'T12:00:00');
+      return `<li class="${i===0?'today':''}" aria-label="${i===0?'Oggi':dn[dt.getDay()]+' '+dt.getDate()+' '+mn[dt.getMonth()]}: ${label[d.k]}, massima ${d.hi} gradi, minima ${d.lo}, pioggia ${d.p} per cento">
+        <span class="d">${i===0?'Oggi':dn[dt.getDay()]}<small>${dt.getDate()} ${mn[dt.getMonth()]}</small></span>
+        ${icon(d.k)}<span class="hi">${d.hi}°</span><span class="lo">min ${d.lo}°</span>
+        <span class="rain"><i></i>${d.p}%</span></li>`;
+    }).join('');
+    note.textContent = live ? 'Previsioni dei prossimi 7 giorni sulla spiaggia del Samsara, aggiornate in tempo reale.'
+                            : 'Previsioni dei prossimi 7 giorni sulla spiaggia del Samsara (anteprima con i dati del ' + SNAP.date + '; sul sito si aggiornano da sole).';
+  }
+  render(SNAP.days.map(([date,hi,lo,p]) => ({date,hi,lo,p,k:fromRain(p)})), false);
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=44.0006&longitude=12.6556&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FRome&forecast_days=7')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(j => { const d = j.daily; render(d.time.map((date,i) => ({date, hi:Math.round(d.temperature_2m_max[i]), lo:Math.round(d.temperature_2m_min[i]), p:d.precipitation_probability_max[i] ?? 0, k:fromCode(d.weather_code[i])})), true); })
+    .catch(() => {});
+})();
+// opening animation: night → 08:00 → sunrise
+(() => {
+  const intro = document.getElementById('intro');
+  const done = () => { document.body.classList.add('ready'); intro.classList.add('out'); setTimeout(() => intro.remove(), 700); document.documentElement.style.overflow = ''; };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let seen = false; try { seen = sessionStorage.getItem('samsara-intro') === '1'; sessionStorage.setItem('samsara-intro','1'); } catch (e) {}
+  if (reduce || seen) { intro.remove(); document.body.classList.add('ready'); return; }
+  document.documentElement.style.overflow = 'hidden';
+  const path = intro.querySelector('path');
+  path.style.setProperty('--len', path.getTotalLength() + 1);
+  const t = document.getElementById('intro-t'), t0 = performance.now() + 300, dur = 1700;
+  let finished = false;
+  (function tick(now){
+    const k = Math.min(1, Math.max(0, (now - t0) / dur)), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k+2, 2)/2;
+    const mins = Math.round(e * 8 * 60 / 15) * 15;
+    t.textContent = String(Math.floor(mins/60)).padStart(2,'0') + ':' + String(mins%60).padStart(2,'0');
+    if (k < 1 && !finished) requestAnimationFrame(tick);
+  })(performance.now());
+  const timers = [setTimeout(() => intro.classList.add('go'), 2500), setTimeout(done, 3400)];
+  const skip = () => { if (finished) return; finished = true; timers.forEach(clearTimeout); done(); };
+  intro.addEventListener('click', skip);
+  addEventListener('keydown', skip, {once:true});
+})();
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+  const sun = document.getElementById('sun'), moon = document.getElementById('moon'),
+        stars = document.getElementById('stars'), lasers = document.getElementById('lasers'),
+        glint = document.getElementById('glint'), hh = document.getElementById('hh'),
+        moment = document.getElementById('moment'), party = document.getElementById('party');
+
+  // stars
+  for (let i = 0; i < 90; i++) {
+    const s = document.createElement('i');
+    s.style.left = Math.random()*100 + '%'; s.style.top = Math.random()*70 + '%';
+    s.style.opacity = (.3 + Math.random()*.7).toFixed(2);
+    stars.appendChild(s);
+  }
+  // laser beams
+  const beamColors = ['#FF8A3D','#3FA9F5','#FF5FA2','#FFD23F','#FF8A3D','#3FA9F5','#B07CFF'];
+
+  // plate wheel
+  const wheel = document.getElementById('wheel'), plates = [...wheel.querySelectorAll('img')],
+        food = document.getElementById('ristorante'), dishName = document.getElementById('dish-name');
+  const N = plates.length;
+  plates.forEach((im,i) => {
+    const a = i/N*2*Math.PI;
+    im.style.left = (50 + Math.cos(a)*38) + '%';
+    im.style.top = (50 + Math.sin(a)*38) + '%';
+  });
+  let activeIdx = -1;
+  const reel = document.getElementById('reel'), track = reel.querySelector('.reel-track');
+  function spin() {
+    const r = food.getBoundingClientRect();
+    const t = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
+    const rot = -t * 360 * 0.9;
+    wheel.style.transform = `rotate(${rot}deg)`;
+    const target = innerWidth > 860 ? 180 : 270;
+    let best = 0, bd = 999;
+    plates.forEach((im,i) => {
+      let d = ((i/N*360 + rot - target) % 360 + 540) % 360 - 180;
+      if (Math.abs(d) < bd) { bd = Math.abs(d); best = i; }
+    });
+    // horizontal photo reel
+    const rr = reel.getBoundingClientRect();
+    const rt = Math.min(1, Math.max(0, -rr.top / Math.max(1, rr.height - innerHeight)));
+    track.style.transform = `translateX(${-rt * Math.max(0, track.scrollWidth - innerWidth)}px)`;
+    if (best !== activeIdx) {
+      activeIdx = best;
+      plates.forEach((im,i) => im.classList.toggle('on', i === best));
+      dishName.style.opacity = 0;
+      setTimeout(() => { dishName.textContent = plates[best].dataset.name; dishName.style.opacity = 1; }, 180);
+    }
+  }
+
+  // snow + gold confetti in the winter section
+  const snow = document.querySelector('.snow');
+  for (let i = 0; i < 60; i++) {
+    const f = document.createElement('i');
+    if (i % 5 === 0) f.className = 'gold';
+    const s = 2 + Math.random()*5;
+    f.style.cssText = `left:${Math.random()*100}%;width:${s}px;height:${s}px;animation-duration:${8+Math.random()*10}s;animation-delay:${-Math.random()*18}s;opacity:${.4+Math.random()*.6}`;
+    snow.appendChild(f);
+  }
+  const beams = beamColors.map((c,i) => { const b = document.createElement('b'); b.style.color = c; lasers.appendChild(b); return b; });
+
+  // sky keyframes: [p, top, bottom, sea]
+  const K_SUMMER = [
+    [0.00,'#8EC9E8','#FBD9B5','#4FA9B8'],
+    [0.22,'#55B4E6','#CDEFF7','#1FA3B5'],
+    [0.45,'#2F9FE0','#A9E4F5','#0E93AE'],
+    [0.64,'#3B3F8F','#FF7A59','#2C4F7A'],
+    [0.80,'#1B1446','#C2307A','#241E55'],
+    [1.00,'#0E0A2E','#3A1670','#120D35']
+  ];
+  const K_XMAS = [
+    [0.00,'#101B35','#8C5A55','#1A2C45'],
+    [0.30,'#16234A','#7D5262','#1B2E48'],
+    [0.55,'#1C2350','#9B5D78','#1A2446'],
+    [0.80,'#121A3C','#4A3566','#121A36'],
+    [1.00,'#0B1426','#241F48','#0C1430']
+  ];
+  let K = K_SUMMER;
+
+  // christmas mode (on the real site: a switch in the panel, optionally with dates)
+  const xsnow = document.getElementById('xsnow');
+  const bokeh = document.getElementById('bokeh');
+  for (let i = 0; i < 16; i++) {
+    const o = document.createElement('i'), d = 40 + Math.random()*140;
+    o.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*72}%;width:${d}px;height:${d}px;opacity:${.25+Math.random()*.5};--dx:${(Math.random()*60-30).toFixed(0)}px;--dy:${(Math.random()*40-20).toFixed(0)}px;animation-duration:${8+Math.random()*10}s;animation-delay:${-Math.random()*10}s`;
+    bokeh.appendChild(o);
+  }
+  for (let i = 0; i < 70; i++) {
+    const f = document.createElement('i');
+    if (i % 4 === 0) f.className = 'gold';
+    const sz = 1.5 + Math.random()*2.5;
+    f.style.cssText = `left:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${14+Math.random()*14}s;animation-delay:${-Math.random()*28}s;opacity:${.35+Math.random()*.5}`;
+    xsnow.appendChild(f);
+  }
+  const capoSec = document.getElementById('capodanno'), heroSec = document.getElementById('hero'), capoHome = capoSec.nextElementSibling;
+  function setMode(mode) {
+    const x = mode === 'xmas';
+    document.body.classList.toggle('xmas', x);
+    K = x ? K_XMAS : K_SUMMER;
+    if (x) heroSec.after(capoSec); else capoHome.before(capoSec);
+    document.querySelectorAll('.mode button').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === mode));
+    try { localStorage.setItem('samsara-mode', mode); } catch (e) {}
+    req();
+  }
+  document.querySelectorAll('.mode button').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  // countdown to 31 Dec, 12:00 Rome time
+  const countEl = document.getElementById('count'), T0 = Date.parse('2026-12-31T12:00:00+01:00');
+  const tickCount = () => {
+    const d = T0 - Date.now();
+    if (d <= 0) { countEl.textContent = 'È oggi: ci vediamo in spiaggia.'; return; }
+    const g = Math.floor(d/864e5), h = Math.floor(d%864e5/36e5), m = Math.floor(d%36e5/6e4);
+    const pl = (n, one, many) => n + ' ' + (n === 1 ? one : many);
+    countEl.textContent = `${g === 1 && h === 0 ? 'Manca' : 'Mancano'} ${pl(g,'giorno','giorni')}, ${pl(h,'ora','ore')} e ${pl(m,'minuto','minuti')}`;
+  };
+  tickCount(); setInterval(tickCount, 30000);
+  const hex = h => [1,3,5].map(i => parseInt(h.slice(i,i+2),16));
+  const mix = (a,b,t) => { const A = hex(a), B = hex(b); return 'rgb(' + A.map((v,i) => Math.round(v + (B[i]-v)*t)).join(',') + ')'; };
+  const sample = p => {
+    for (let i = 0; i < K.length-1; i++) {
+      if (p <= K[i+1][0]) { const t = (p-K[i][0])/(K[i+1][0]-K[i][0]); return [1,2,3].map(j => mix(K[i][j],K[i+1][j],t)); }
+    }
+    return K[K.length-1].slice(1);
+  };
+  const moments = [[8,'Si apre la spiaggia'],[11,'Mattina in prima fila'],[12.5,'Pranzo sul mare'],[16,'Pomeriggio'],[18,'Aperitivo al tramonto'],[19.5,'Beach party']];
+
+  let ticking = false;
+  function frame() {
+    ticking = false;
+    const end = party.offsetTop + party.offsetHeight - innerHeight;
+    const p = Math.min(1, Math.max(0, scrollY / Math.max(1,end)));
+    const [top, bot, sea] = sample(p);
+    root.style.setProperty('--sky-top', top);
+    root.style.setProperty('--sky-bot', bot);
+    root.style.setProperty('--sea', sea);
+
+    // sun arc: rises, crosses, sinks into the sea at p≈0.74
+    const t = Math.min(p / 0.74, 1.15);
+    const W = innerWidth, H = innerHeight, size = sun.offsetWidth;
+    const x = W*0.06 + t*(W*0.82) - size/2;
+    const horizon = H*0.76;
+    const y = horizon - Math.sin(Math.PI*Math.min(t,1))*H*0.55 - size/2 + (t>1 ? (t-1)*H*1.4 : 0) + (t<0.08 ? (0.08-t)*H*1.2 : 0);
+    sun.style.transform = `translate(${x}px,${y}px)`;
+    glint.style.left = (x) + 'px';
+    glint.style.opacity = t < 1 ? (0.25 + 0.25*Math.sin(Math.PI*t)).toFixed(2) : 0;
+
+    const night = Math.max(0, (p-0.72)/0.28);
+    stars.style.opacity = night;
+    moon.style.opacity = night;
+    const party_ = Math.max(0, (p-0.84)/0.16);
+    lasers.style.opacity = party_;
+    if (!reduce) {
+      const now = performance.now()/1000;
+      beams.forEach((b,i) => { b.style.transform = `rotate(${Math.sin(now*0.6 + i*1.1)*(28 + i*4)}deg)`; });
+    }
+    root.style.setProperty('--party-w', (60 + party_*90).toFixed(0));
+
+    // text colour flips at dusk
+    const dark = p > 0.6 || document.body.classList.contains('xmas');
+    root.style.setProperty('--fg', dark ? '#F3EEFF' : '#10264A');
+    root.style.setProperty('--fg-soft', dark ? 'rgba(243,238,255,.78)' : 'rgba(16,38,74,.74)');
+    root.style.setProperty('--bg-on', dark ? '#0E0A2E' : '#fff');
+    const hdr = document.querySelector('header');
+    hdr.style.color = dark ? '#F3EEFF' : '#10264A';
+    hdr.classList.toggle('scrolled', scrollY > 40);
+    document.body.classList.toggle('at-top', scrollY < innerHeight*0.35);
+    document.getElementById('clock').style.color = dark ? '#F3EEFF' : '#10264A';
+
+    // clock 08:00 → 22:00
+    const h = 8 + p*14, hr = Math.floor(h), mn = Math.floor((h-hr)*60/15)*15;
+    hh.textContent = String(hr).padStart(2,'0') + ':' + String(mn).padStart(2,'0');
+    let m = moments[0][1]; moments.forEach(([at,label]) => { if (h >= at) m = label; });
+    const capo = document.getElementById('capodanno').getBoundingClientRect().top;
+    const capoR = document.getElementById('capodanno').getBoundingClientRect();
+    if (document.body.classList.contains('xmas')) moment.textContent = (capoR.top < innerHeight*0.6 && capoR.bottom > innerHeight*0.4) ? 'Winter Beach Party' : m;
+    else moment.textContent = capo < innerHeight*0.5 ? 'Siamo chiusi, ci vediamo domani' : m;
+    spin();
+  }
+  const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
+  addEventListener('scroll', req, {passive:true});
+  addEventListener('resize', req);
+  // keep lasers moving while in party zone
+  if (!reduce) (function loop(){ if (parseFloat(lasers.style.opacity||0) > 0) frame(); requestAnimationFrame(loop); })();
+  let startMode = 'xmas'; try { startMode = localStorage.getItem('samsara-mode') || 'xmas'; } catch (e) {}
+  setMode(startMode);
+  frame();
+
+  // mobile menu
+  const mbtn = document.querySelector('.menu-btn'), mnav = document.getElementById('mnav'), hdrEl = document.querySelector('header');
+  const setMenu = open => {
+    mbtn.setAttribute('aria-expanded', open);
+    hdrEl.classList.toggle('menu-open', open);
+    document.body.classList.toggle('menu-on', open);
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    if (open) { mnav.hidden = false; requestAnimationFrame(() => mnav.classList.add('open')); mnav.querySelector('a').focus({preventScroll:true}); }
+    else { mnav.classList.remove('open'); setTimeout(() => { if (!mnav.classList.contains('open')) mnav.hidden = true; }, 500); }
+  };
+  mbtn.addEventListener('click', () => setMenu(mbtn.getAttribute('aria-expanded') !== 'true'));
+  mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (!id.startsWith('#')) { setMenu(false); return; }
+    e.preventDefault(); setMenu(false);
+    const target = document.querySelector(id);
+    if (target) requestAnimationFrame(() => scrollTo({top: target.offsetTop, behavior: reduce ? 'auto' : 'smooth'}));
+  }));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && mbtn.getAttribute('aria-expanded') === 'true') { setMenu(false); mbtn.focus(); } });
+  // playlists: concept preview
+  document.querySelectorAll('.disc').forEach(d => d.addEventListener('click', () => {
+    const was = d.classList.contains('on');
+    document.querySelectorAll('.disc').forEach(x => x.classList.remove('on'));
+    const msg = document.querySelector('.sp-msg');
+    if (!was) { d.classList.add('on'); msg.textContent = '"' + d.dataset.pl + '": playlist di esempio. Sul sito vero qui si apre il lettore Spotify.'; }
+    else msg.textContent = '';
+  }));
+  // language toggle (visual only in concept)
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.lang button').forEach(x => x.setAttribute('aria-pressed', x.textContent === b.textContent));
+  }));
+  // videos: play only while visible
+  const vids = document.querySelectorAll('video');
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { const pr = e.target.play(); if (pr) pr.catch(() => {}); } else e.target.pause();
+    }), {threshold: 0.2});
+    vids.forEach(v => io.observe(v));
+  }
+  // forms: concept preview
+  [['f-privati','Richiesta pronta. Nel sito definitivo arriva via email e WhatsApp allo staff.'],
+   ['f-news','Iscrizione pronta. Nel sito definitivo finisce nella lista newsletter.']].forEach(([id,msg]) => {
+    const f = document.getElementById(id);
+    f.addEventListener('submit', e => { e.preventDefault(); f.querySelector('.ok').textContent = msg; });
+  });
+})();
+</script>
+</body>
+</html>
