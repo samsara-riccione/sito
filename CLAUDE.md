@@ -12,7 +12,7 @@ Chiunque in ufficio può chiedere modifiche a Claude: queste regole valgono per 
 
 ## Identità del sito (da rispettare)
 - **Racconto:** la homepage è una giornata intera. Scorrendo, il cielo va dall'alba al tramonto e l'orologio dalle 08:00 alle 22:00. Non rompere questo meccanismo.
-- **Font:** Anybody (titoli, larghezza variabile) e Instrument Sans (testi). Non aggiungere altri font.
+- **Font:** Anybody (titoli, larghezza variabile) e Instrument Sans (testi), ospitati nella cartella `fonts/`. Non usare Google Fonts e non aggiungere altri font.
 - **Colori estate:** navy `#10264A`, sole `#FFD23F`, corallo `#FF6B57`, magenta `#E0337A`, viola `#7B2FF7`, ciano `#3FE0E8`.
 - **Modalità Natale:** blu notte `#0B1426`, oro `#D8B46A` / `#F3DDA6`, luci sfocate e neve sottile. Stile elegante: niente decorazioni da cartone animato (cappelli, lampadine colorate, palme addobbate).
 - **Logo:** solo quello ufficiale vettoriale (`img/logo.svg`), mai ridisegnato o deformato.
@@ -33,6 +33,7 @@ Chiunque in ufficio può chiedere modifiche a Claude: queste regole valgono per 
 ## Struttura attuale
 - `index.html`: pagina unica con stile e script inclusi
 - `img/`: foto (webp), video (mp4), logo
+- `fonts/`: caratteri del sito (woff2) con le relative licenze
 - `netlify.toml`: impostazioni di pubblicazione
 
 Prima di consegnare una modifica, controlla che la pagina non dia errori nella console e che su telefono niente esca dallo schermo.
