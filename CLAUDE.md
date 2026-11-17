@@ -35,5 +35,6 @@ Chiunque in ufficio può chiedere modifiche a Claude: queste regole valgono per 
 - `img/`: foto (webp), video (mp4), logo
 - `fonts/`: caratteri del sito (woff2) con le relative licenze
 - `netlify.toml`: impostazioni di pubblicazione
+- `sitemap.xml` e `robots.txt`: per Google. Se aggiungi una pagina, aggiungila anche alla sitemap
 
 Prima di consegnare una modifica, controlla che la pagina non dia errori nella console e che su telefono niente esca dallo schermo.
