@@ -29,4 +29,13 @@ export const struttura: StructureResolver = (S) =>
         .title('Menu: piatti')
         .schemaType('piatto')
         .child(S.documentTypeList('piatto').title('Piatti')),
+      S.divider(),
+      S.listItem()
+        .title('Partner')
+        .schemaType('partner')
+        .child(
+          S.documentTypeList('partner')
+            .title('Partner nella fascia')
+            .defaultOrdering([{field: 'ordine', direction: 'asc'}]),
+        ),
     ])
