@@ -2,8 +2,19 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
+<!-- Google Consent Mode v2: tutto negato finché il visitatore non accetta nel banner di Iubenda -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied', wait_for_update:500});
+gtag('set', 'ads_data_redaction', true);
+gtag('set', 'url_passthrough', true);
+</script>
 <!-- Iubenda: banner cookie e consensi (Privacy Controls and Cookie Solution). Deve restare il primo script della pagina. -->
 <script type="text/javascript" src="https://embeds.iubenda.com/widgets/85e1dfd5-01fb-4de9-b923-bdc3fcd37480.js"></script>
+<!-- Google Analytics 4 (G-61L2GDJ5WW) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-61L2GDJ5WW"></script>
+<script>gtag('js', new Date()); gtag('config', 'G-61L2GDJ5WW');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Samsara Riccione: beach club, ristorante e beach party</title>
 <meta name="description" content="Samsara Beach Club a Riccione: spiaggia, pranzo sul mare, aperitivo e beach party dalle 8 alle 22. Winter Beach Party il 31 dicembre e 1 gennaio.">
@@ -771,6 +782,22 @@ footer a:hover{text-decoration:underline}
     .then(j => { const d = j.daily; render(d.time.map((date,i) => ({date, hi:Math.round(d.temperature_2m_max[i]), lo:Math.round(d.temperature_2m_min[i]), p:d.precipitation_probability_max[i] ?? 0, k:fromCode(d.weather_code[i])})), true); })
     .catch(() => {});
 })();
+// statistiche: contatti e prenotazioni (Google Analytics; i pixel si agganciano qui)
+(() => {
+  const ev = (name, params) => { try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch (e) {} };
+  window.samsaraEvent = ev;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href]'); if (!a) return;
+    const h = a.href, where = a.classList.contains('wa') ? 'pulsante_fisso' : ((a.closest('section,header,nav,footer') || {}).id || (a.closest('footer') ? 'footer' : ''));
+    if (h.includes('wa.me')) ev('contatto_whatsapp', {posizione: where, testo: a.textContent.trim().slice(0,60)});
+    else if (h.includes('spiagge.it')) ev('click_prenotazione', {servizio: 'ombrellone', posizione: where});
+    else if (h.includes('riccionenotte')) ev('click_prenotazione', {servizio: 'winter_beach_party', posizione: where});
+    else if (h.includes('thefork')) ev('click_prenotazione', {servizio: 'ristorante', posizione: where});
+    else if (h.includes('ticketnation')) ev('click_prenotazione', {servizio: 'beach_party', posizione: where});
+    else if (h.startsWith('tel:')) ev('contatto_telefono', {posizione: where});
+    else if (h.startsWith('mailto:')) ev('contatto_email', {posizione: where});
+  });
+})();
 // opening animation: night → 08:00 → sunrise
 (() => {
   const intro = document.getElementById('intro');
@@ -1027,7 +1054,7 @@ footer a:hover{text-decoration:underline}
     f.addEventListener('submit', e => {
       e.preventDefault(); btn.disabled = true; out.textContent = 'Invio in corso…';
       fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(new FormData(f)).toString()})
-        .then(r => { if (!r.ok) throw 0; out.textContent = msg; f.reset(); })
+        .then(r => { if (!r.ok) throw 0; out.textContent = msg; f.reset(); if (window.samsaraEvent) samsaraEvent(id === 'f-news' ? 'sign_up' : 'generate_lead', {form: id === 'f-news' ? 'newsletter' : 'eventi_privati'}); })
         .catch(() => { out.textContent = 'Invio non riuscito. Scrivici su WhatsApp al 348 612 8016.'; })
         .finally(() => { btn.disabled = false; });
     });
