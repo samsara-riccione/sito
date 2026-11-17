@@ -1,4 +1,18 @@
+# Il sito è aperto a motori di ricerca e assistenti AI.
 User-agent: *
+Allow: /
+
+# Assistenti AI (elencati per chiarezza: possono leggere tutto il sito)
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://www.samsarariccione.it/sitemap.xml
