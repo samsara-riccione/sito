@@ -316,6 +316,13 @@ body.xmas.ready #hero .tag.xm-only{opacity:1;transform:none}
 .ph img{display:block;width:100%;height:100%;object-fit:cover}
 .ph.land{aspect-ratio:4/3;transform:rotate(2deg)}
 .ph.tall{aspect-ratio:2/3;max-height:82vh;transform:rotate(-2deg)}
+#drone{position:relative;margin:0;overflow:hidden;background:#10264A}
+#drone video{display:block;width:100%;aspect-ratio:16/9;max-height:100vh;object-fit:cover}
+#drone::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,38,74,0) 55%,rgba(16,38,74,.75));pointer-events:none}
+#drone .dr-cap{position:absolute;left:4vw;right:4vw;bottom:clamp(28px,12vh,120px);z-index:1;color:#fff}
+#drone h2{font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 120;font-size:clamp(34px,5.4vw,88px);line-height:.95;margin:0 0 .3em}
+#drone p{font-size:clamp(15px,1.3vw,19px);max-width:34em;margin:0;opacity:.92}
+@media (max-width:700px){#drone video{aspect-ratio:4/5}}
 #reel{position:relative;height:340vh}
 .reel-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:4vh}
 #reel h2{font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 120;font-size:clamp(40px,6vw,96px);line-height:.95;padding:0 4vw;color:#F3EEFF}
@@ -575,6 +582,14 @@ footer a:hover{text-decoration:underline}
       <div class="actions"><a class="btn solid" href="https://wa.me/393486128016?text=Ciao%20Samsara%2C%20vorrei%20info%20su%20tavoli%20e%20biglietti%20dei%20beach%20party">Tavoli e biglietti <small>su WhatsApp</small></a></div>
     </div>
     <figure class="ph tall vid"><video src="img/v3.mp4" poster="img/v3.webp" muted loop playsinline preload="metadata" aria-label="Video: beach party al tramonto con luci, fumi e gonfiabili giganti"></video></figure>
+  </section>
+
+  <section id="drone" aria-labelledby="drone-h">
+    <video src="img/drone.mp4" poster="img/drone.webp" muted loop playsinline preload="none" aria-label="Video dal drone: volo sulla spiaggia del Samsara al tramonto e dentro il beach party"></video>
+    <div class="dr-cap">
+      <h2 id="drone-h">Il Samsara dall'alto.</h2>
+      <p>Un volo sulla spiaggia al tramonto, fino in mezzo al beach party.</p>
+    </div>
   </section>
 
   <section id="reel" aria-label="Foto dei beach party">
