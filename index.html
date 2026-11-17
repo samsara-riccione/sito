@@ -355,6 +355,18 @@ body.xmas.ready #hero .tag.xm-only{opacity:1;transform:none}
 
 /* after-dark block: solid night */
 .night{position:relative;z-index:10;background:#0E0A2E;color:#F3EEFF;padding:14vh 4vw}
+#riccione .rc-head{max-width:40em;margin-bottom:5vh}
+.rc-cards{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:3vw}
+.rc-card a{display:grid;gap:14px;text-decoration:none;color:inherit}
+.rc-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:18px;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.rc-card a:hover img,.rc-card a:focus-visible img{transform:scale(1.02)}
+.rc-card a:focus-visible{outline:3px solid #FFD23F;outline-offset:6px;border-radius:18px}
+.rc-card small{font-size:13px;font-weight:600;letter-spacing:.04em;color:#FFD23F}
+.rc-card h3{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 105;font-size:clamp(22px,2vw,28px);line-height:1.1}
+.rc-card p{font-size:16px}
+.rc-card .more{font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:3px}
+.rc-out{margin-top:5vh}
+@media (prefers-reduced-motion:reduce){.rc-card img{transition:none}}
 .night h2{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(36px,5vw,72px);line-height:.95;margin-bottom:18px}
 .night p{color:rgba(243,238,255,.75);max-width:36em}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:start}
@@ -702,6 +714,23 @@ footer a:hover{text-decoration:underline}
       <div class="actions"><a class="btn" style="color:#fff" href="https://www.google.com/maps/search/?api=1&query=Viale+Gabriele+D'Annunzio+150+Riccione">Apri in Google Maps</a></div>
     </div>
   </div>
+</section>
+
+<section class="night" id="riccione" aria-labelledby="riccione-h">
+  <div class="rc-head">
+    <h2 id="riccione-h">Riccione, oltre il Samsara.</h2>
+    <p>Storie, consigli e novità dalla città. Per tutto il resto, eventi, mostre e cosa visitare, c'è il sito turistico ufficiale.</p>
+  </div>
+  <ul class="rc-cards">
+    <li class="rc-card"><a href="/riccione/treno-riccione-music-city/">
+      <img src="img/treno-samsara.webp" alt="Il vagone Samsara del treno Riccione Music City sul binario" loading="lazy" width="1280" height="960">
+      <small>In treno</small>
+      <h3>Next stop: beach party. Il Samsara sul treno Riccione Music City</h3>
+      <p>Il treno che Riccione dedica alla musica ha un vagone tutto nostro. Dove passa e come arrivare dalla stazione.</p>
+      <span class="more">Leggi l'articolo</span>
+    </a></li>
+  </ul>
+  <div class="actions rc-out"><a class="btn" style="color:#fff" href="https://riccione.it" target="_blank" rel="noopener">Scopri Riccione su Riccione Welcome</a></div>
 </section>
 
 <section class="night" id="privati">
