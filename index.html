@@ -323,6 +323,16 @@ body.xmas.ready #hero .tag.xm-only{opacity:1;transform:none}
 #drone h2{font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 120;font-size:clamp(34px,5.4vw,88px);line-height:.95;margin:0 0 .3em}
 #drone p{font-size:clamp(15px,1.3vw,19px);max-width:34em;margin:0;opacity:.92}
 @media (max-width:700px){#drone video{aspect-ratio:4/5}}
+#fork-dlg{margin:auto;padding:0;border:0;border-radius:22px;width:min(520px,94vw);height:min(860px,90vh);max-height:90vh;background:#fff;color:#10264A;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+#fork-dlg::backdrop{background:rgba(11,20,38,.6);backdrop-filter:blur(4px)}
+#fork-dlg[open]{display:flex;flex-direction:column}
+#fork-dlg .fd-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 14px 22px;background:#10264A;color:#fff}
+#fork-dlg .fd-head h2{margin:0;font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 110;font-size:20px}
+#fork-dlg .fd-x{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:22px;line-height:1;cursor:pointer}
+#fork-dlg iframe{flex:1;width:100%;border:0;min-height:0}
+#fork-dlg .fd-alt{margin:0;padding:10px 16px;font-size:13px;text-align:center;border-top:1px solid #e6e8ee}
+#fork-dlg .fd-alt a{color:#10264A}
+@media (max-width:600px){#fork-dlg{width:100vw;height:100dvh;max-width:100vw;max-height:100dvh;border-radius:0}}
 #reel{position:relative;height:340vh}
 .reel-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:4vh}
 #reel h2{font-family:Anybody;font-weight:900;font-variation-settings:"wdth" 120;font-size:clamp(40px,6vw,96px);line-height:.95;padding:0 4vw;color:#F3EEFF}
@@ -491,13 +501,18 @@ footer a:hover{text-decoration:underline}
   </ul>
   <div class="mnav-cta">
     <a class="btn solid" href="https://www.spiagge.it/stabilimenti-balneari/28640-samsara-beach-club/">Prenota l'ombrellone</a>
-    <a class="btn" href="https://wa.me/393486128016?text=Ciao%20Samsara%2C%20vorrei%20prenotare%20un%20tavolo">Prenota un tavolo</a>
+    <a class="btn" href="https://widget.thefork.com/a66e4546-c1fb-4edb-a87a-1cf0115cf339" data-fork target="_blank" rel="noopener">Prenota un tavolo</a>
   </div>
   <div class="lang m" role="group" aria-label="Lingua" hidden><button aria-pressed="true">IT</button><button aria-pressed="false">EN</button><button aria-pressed="false">DE</button><button aria-pressed="false">FR</button><button aria-pressed="false">SV</button></div>
 </nav>
 
 <div id="clock" aria-hidden="true"><span id="hh">08:00</span><small id="moment">Si apre la spiaggia</small></div>
 
+<dialog id="fork-dlg" aria-labelledby="fork-h">
+  <div class="fd-head"><h2 id="fork-h">Prenota il tavolo</h2><button class="fd-x" type="button" aria-label="Chiudi">&times;</button></div>
+  <iframe title="Prenotazione ristorante Samsara su TheFork" data-src="https://widget.thefork.com/a66e4546-c1fb-4edb-a87a-1cf0115cf339" allow="payment *" loading="lazy"></iframe>
+  <p class="fd-alt">Problemi con la prenotazione? <a href="https://wa.me/393486128016?text=Ciao%20Samsara%2C%20vorrei%20prenotare%20un%20tavolo">Scrivici su WhatsApp</a></p>
+</dialog>
 <a class="wa" href="https://wa.me/393486128016" aria-label="Scrivici su WhatsApp, +39 348 612 8016">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.5.4.1.1.1.7-.1 1.3Z"/></svg>
   WhatsApp
@@ -545,7 +560,7 @@ footer a:hover{text-decoration:underline}
         <p>Cucina di mare, pasta fresca e piadine, con una carta di vini e cocktail pensata per la spiaggia. Se non vuoi alzarti dal lettino, il pranzo te lo portiamo noi.</p>
         <p class="dish" aria-live="polite"><span id="dish-name">Tagliolini alle vongole</span></p>
         <div class="actions">
-          <a class="btn solid" href="https://wa.me/393486128016?text=Ciao%20Samsara%2C%20vorrei%20prenotare%20un%20tavolo">Prenota un tavolo <small>su WhatsApp</small></a>
+          <a class="btn solid" href="https://widget.thefork.com/a66e4546-c1fb-4edb-a87a-1cf0115cf339" data-fork target="_blank" rel="noopener">Prenota un tavolo <small>su TheFork</small></a>
           <a class="btn" href="https://wa.me/393486128016?text=Ciao%20Samsara%2C%20mi%20mandate%20il%20menu%3F">Chiedi il menu</a>
         </div>
       </div>
@@ -820,6 +835,19 @@ footer a:hover{text-decoration:underline}
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(j => { const d = j.daily; render(d.time.map((date,i) => ({date, hi:Math.round(d.temperature_2m_max[i]), lo:Math.round(d.temperature_2m_min[i]), p:d.precipitation_probability_max[i] ?? 0, k:fromCode(d.weather_code[i])})), true); })
     .catch(() => {});
+})();
+// prenotazione ristorante: calendario TheFork in una finestra sopra la pagina
+(() => {
+  const d = document.getElementById('fork-dlg'); if (!d || typeof d.showModal !== 'function') return;
+  const fr = d.querySelector('iframe');
+  document.querySelectorAll('a[data-fork]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    if (!fr.src) fr.src = fr.dataset.src;
+    const nav = a.closest('nav'); if (nav) { const t = document.querySelector('[aria-controls="' + nav.id + '"]'); if (t && t.getAttribute('aria-expanded') === 'true') t.click(); }
+    d.showModal();
+  }));
+  d.querySelector('.fd-x').addEventListener('click', () => d.close());
+  d.addEventListener('click', e => { if (e.target === d) d.close(); });
 })();
 // statistiche: contatti e prenotazioni (Google Analytics; i pixel si agganciano qui)
 (() => {
