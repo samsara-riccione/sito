@@ -36,5 +36,7 @@ Chiunque in ufficio può chiedere modifiche a Claude: queste regole valgono per 
 - `fonts/`: caratteri del sito (woff2) con le relative licenze
 - `netlify.toml`: impostazioni di pubblicazione
 - `sitemap.xml` e `robots.txt`: per Google. Se aggiungi una pagina, aggiungila anche alla sitemap
+- `pannello/`: il pannello Sanity (progetto `2i09neph`, dataset `production`), online su samsara-riccione.sanity.studio. Non viene pubblicato sul sito. Schede: Avvisi, Eventi e party, Menu (categorie e piatti). Le chiavi di accesso non vanno mai scritte nel codice.
+- Gli avvisi in cima al sito arrivano dal pannello (scheda Avvisi): per cambiarli non serve toccare il codice
 
 Prima di consegnare una modifica, controlla che la pagina non dia errori nella console e che su telefono niente esca dallo schermo.
