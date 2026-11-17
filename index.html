@@ -238,7 +238,9 @@ body.ready #hero h1{animation-play-state:running}
 .meta strong{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(18px,1.5vw,24px);line-height:1.15}
 .meta span{color:rgba(243,238,255,.8);font-size:15px}
 .meta small{color:rgba(243,238,255,.55);font-size:13px}
-.sp-msg{min-height:1.4em;margin-top:4vh;font-weight:600;color:#1ED760}
+.sp-player{margin-top:5vh;max-width:760px}
+.sp-player iframe{display:block;width:100%;height:352px;border:0;border-radius:14px;background:rgba(255,255,255,.06)}
+
 .sp-all{margin-top:2vh;color:#F3EEFF;gap:12px}
 .sp-all svg{width:24px;height:24px}
 @media (max-width:860px){.discs{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 26px;padding-right:12%}}
@@ -626,51 +628,34 @@ footer a:hover{text-decoration:underline}
     </div>
   </section>
 
-  <section id="spotify" aria-labelledby="spotify-h" hidden>
+  <section id="spotify" aria-labelledby="spotify-h">
     <div class="sp-head">
       <h2 id="spotify-h">Il suono del Samsara</h2>
-      <p>Una playlist per ogni ora della giornata, firmata dai nostri dj. Portati la spiaggia in cuffia: in viaggio verso Riccione o quando l'estate è finita.</p>
-      <p class="note">Playlist e copertine di esempio: quelle vere arriveranno collegate a Spotify.</p>
+      <p>Le playlist della spiaggia, scelte dai nostri dj. Portati il Samsara in cuffia: in viaggio verso Riccione o quando l'estate è finita.</p>
     </div>
-    <ul class="discs"><li><button class="disc" type="button" data-pl="Morning Chill">
+    <ul class="discs"><li><button class="disc" type="button" data-pl="Day Sound" data-id="54m42t0ZahKwQn09aKxTd1" aria-controls="sp-player">
       <span class="sleeve c1" aria-hidden="true">
         <span class="vinyl"><img src="img/p03.webp" alt="" loading="lazy" width="420" height="420"></span>
-        <span class="cover"><img src="img/p03.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">08:00</span><span class="cv-t">Morning Chill</span><span class="cv-d">Samsara Beach</span></span>
+        <span class="cover"><img src="img/p03.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">Day</span><span class="cv-t">Day Sound</span><span class="cv-d">Samsara Beach</span></span>
       </span>
-      <span class="meta"><strong>Morning Chill</strong><span>Samsara Beach</span><small>32 brani, 1 h 54 min</small></span>
-    </button></li><li><button class="disc" type="button" data-pl="Lunch on the Beach">
-      <span class="sleeve c2" aria-hidden="true">
-        <span class="vinyl"><img src="img/a-domme.webp" alt="" loading="lazy" width="420" height="420"></span>
-        <span class="cover"><img src="img/a-domme.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">13:00</span><span class="cv-t">Lunch on the Beach</span><span class="cv-d">Fabio Marzo & Domme</span></span>
-      </span>
-      <span class="meta"><strong>Lunch on the Beach</strong><span>Fabio Marzo & Domme</span><small>28 brani, 1 h 41 min</small></span>
-    </button></li><li><button class="disc" type="button" data-pl="Brass on the Beach">
-      <span class="sleeve c3" aria-hidden="true">
-        <span class="vinyl"><img src="img/a-gabriele-blandini.webp" alt="" loading="lazy" width="420" height="420"></span>
-        <span class="cover"><img src="img/a-gabriele-blandini.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">17:30</span><span class="cv-t">Brass on the Beach</span><span class="cv-d">Gabriele Blandini</span></span>
-      </span>
-      <span class="meta"><strong>Brass on the Beach</strong><span>Gabriele Blandini</span><small>22 brani, 1 h 18 min</small></span>
-    </button></li><li><button class="disc" type="button" data-pl="Afro Sunset">
+      <span class="meta"><strong>Day Sound</strong><span>Samsara Beach</span><small>124 brani</small></span>
+    </button></li><li><button class="disc" type="button" data-pl="Martes Bonito" data-id="1SOKcbfiA4EHG1kJqGuvzY" aria-controls="sp-player">
       <span class="sleeve c4" aria-hidden="true">
         <span class="vinyl"><img src="img/a-cristina-oliveira.webp" alt="" loading="lazy" width="420" height="420"></span>
-        <span class="cover"><img src="img/a-cristina-oliveira.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">18:30</span><span class="cv-t">Afro Sunset</span><span class="cv-d">Cristina Oliveira</span></span>
+        <span class="cover"><img src="img/a-cristina-oliveira.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">Martedì</span><span class="cv-t">Martes Bonito</span><span class="cv-d">Cristina Oliveira</span></span>
       </span>
-      <span class="meta"><strong>Afro Sunset</strong><span>Cristina Oliveira</span><small>26 brani, 1 h 47 min</small></span>
-    </button></li><li><button class="disc" type="button" data-pl="Beach Party Anthems">
+      <span class="meta"><strong>Martes Bonito</strong><span>Selezione di Cristina Oliveira</span><small>143 brani</small></span>
+    </button></li><li><button class="disc" type="button" data-pl="Samsara Beach" data-id="0J3JjiZKHLaFa9IBxaCgij" aria-controls="sp-player">
       <span class="sleeve c5" aria-hidden="true">
         <span class="vinyl"><img src="img/a-danilo-secli.webp" alt="" loading="lazy" width="420" height="420"></span>
-        <span class="cover"><img src="img/a-danilo-secli.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">19:30</span><span class="cv-t">Beach Party Anthems</span><span class="cv-d">Danilo Seclì</span></span>
+        <span class="cover"><img src="img/a-danilo-secli.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">Party</span><span class="cv-t">Samsara Beach</span><span class="cv-d">Danilo Seclì</span></span>
       </span>
-      <span class="meta"><strong>Beach Party Anthems</strong><span>Danilo Seclì</span><small>40 brani, 2 h 36 min</small></span>
-    </button></li><li><button class="disc" type="button" data-pl="After Sunset">
-      <span class="sleeve c6" aria-hidden="true">
-        <span class="vinyl"><img src="img/a-marco-giorgino.webp" alt="" loading="lazy" width="420" height="420"></span>
-        <span class="cover"><img src="img/a-marco-giorgino.webp" alt="" loading="lazy" width="420" height="420"><svg class="cv-mark" viewBox="0 0 59.3 59.3" aria-hidden="true"><path d="M59.3 4.1H4V55.2H55.3V18.5H18.2V41H41V28.7" fill="none" stroke="currentColor" stroke-width="8"/></svg><span class="cv-h">21:00</span><span class="cv-t">After Sunset</span><span class="cv-d">Marco Giorgino</span></span>
-      </span>
-      <span class="meta"><strong>After Sunset</strong><span>Marco Giorgino</span><small>30 brani, 2 h 05 min</small></span>
+      <span class="meta"><strong>Samsara Beach</strong><span>Selezione di Danilo Seclì</span><small>37 brani</small></span>
     </button></li></ul>
-    <p class="sp-msg" role="status"></p>
-    <a class="btn sp-all" href="https://open.spotify.com/search/Samsara%20Beach/playlists" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1ED760"/><path d="M6.5 9.3c3.8-1.1 8-.8 11.2 1M7.2 12.4c3.1-.9 6.6-.6 9.3.9M7.8 15.3c2.5-.6 5.1-.4 7.2.7" stroke="#0E0A2E" stroke-width="1.7" fill="none" stroke-linecap="round"/></svg>Segui Samsara Beach su Spotify</a>
+    <div class="sp-player" id="sp-player" hidden>
+      <iframe title="Lettore Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+    <a class="btn sp-all" href="https://open.spotify.com/user/tuzjjb24tq2gd6wdnj3451io7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1ED760"/><path d="M6.5 9.2c3.6-1.1 8-.8 11.2 1.1M7.2 12.3c3-.9 6.6-.6 9.3 1M7.9 15.2c2.4-.7 5.2-.5 7.3.8" fill="none" stroke="#10264A" stroke-width="1.7" stroke-linecap="round"/></svg>Segui Samsara Beach su Spotify</a>
   </section>
 
 </main>
@@ -1091,16 +1076,21 @@ footer a:hover{text-decoration:underline}
     if (!id.startsWith('#')) { setMenu(false); return; }
     e.preventDefault(); setMenu(false);
     const target = document.querySelector(id);
-    if (target) requestAnimationFrame(() => scrollTo({top: target.offsetTop, behavior: reduce ? 'auto' : 'smooth'}));
+    if (target) requestAnimationFrame(() => scrollTo({top: target.offsetTop, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}));
   }));
   addEventListener('keydown', e => { if (e.key === 'Escape' && mbtn.getAttribute('aria-expanded') === 'true') { setMenu(false); mbtn.focus(); } });
-  // playlists: concept preview
+  // playlists: il lettore Spotify si carica solo quando si sceglie una playlist
+  const spBox = document.getElementById('sp-player'), spFr = spBox && spBox.querySelector('iframe');
   document.querySelectorAll('.disc').forEach(d => d.addEventListener('click', () => {
     const was = d.classList.contains('on');
-    document.querySelectorAll('.disc').forEach(x => x.classList.remove('on'));
-    const msg = document.querySelector('.sp-msg');
-    if (!was) { d.classList.add('on'); msg.textContent = '"' + d.dataset.pl + '": playlist di esempio. Sul sito vero qui si apre il lettore Spotify.'; }
-    else msg.textContent = '';
+    document.querySelectorAll('.disc').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-expanded', 'false'); });
+    if (was) { spBox.hidden = true; spFr.removeAttribute('src'); return; }
+    d.classList.add('on'); d.setAttribute('aria-expanded', 'true');
+    spFr.src = 'https://open.spotify.com/embed/playlist/' + d.dataset.id + '?utm_source=generator';
+    spFr.title = 'Lettore Spotify: ' + d.dataset.pl;
+    spBox.hidden = false;
+    spBox.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest'});
+    if (window.samsaraEvent) samsaraEvent('ascolto_playlist', {playlist: d.dataset.pl});
   }));
   // language toggle (visual only in concept)
   document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => {
