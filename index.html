@@ -384,6 +384,17 @@ body.xmas.ready #hero .tag.xm-only{opacity:1;transform:none}
 .rc-card .more{font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:3px}
 .rc-out{margin-top:5vh}
 @media (prefers-reduced-motion:reduce){.rc-card img{transition:none}}
+#faq .faq-wrap{max-width:820px}
+#faq h3{font-family:"Instrument Sans";font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FFD23F;margin:5vh 0 1.2vh}
+#faq details{border-bottom:1px solid rgba(243,238,255,.14)}
+#faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font-size:clamp(17px,1.5vw,20px);font-weight:500;color:#F3EEFF}
+#faq summary::-webkit-details-marker{display:none}
+#faq summary::after{content:"+";font-size:26px;line-height:1;color:#FFD23F;transition:transform .3s}
+#faq details[open] summary::after{transform:rotate(45deg)}
+#faq summary:focus-visible{outline:2px solid #FFD23F;outline-offset:4px}
+#faq details p{padding:0 0 18px;font-size:16px;max-width:40em}
+#faq details p a{color:#FFD23F;font-weight:600;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){#faq summary::after{transition:none}}
 .night h2{font-family:Anybody;font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(36px,5vw,72px);line-height:.95;margin-bottom:18px}
 .night p{color:rgba(243,238,255,.75);max-width:36em}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:start}
@@ -761,6 +772,40 @@ footer a:hover{text-decoration:underline}
     </a></li>
   </ul>
   <div class="actions rc-out"><a class="btn" style="color:#fff" href="https://riccione.it" target="_blank" rel="noopener">Scopri Riccione su Riccione Welcome</a></div>
+</section>
+
+<section class="night" id="faq" aria-labelledby="faq-h">
+  <div class="faq-wrap">
+    <h2 id="faq-h">Domande frequenti.</h2>
+    <h3>Arrivare</h3>
+    <details><summary>C&#x27;è un parcheggio?</summary><p>Sì, davanti al locale c&#x27;è un parcheggio molto grande, a pagamento.</p></details>
+    <details><summary>Posso arrivare in bici?</summary><p>Sì. Non ci sono rastrelliere, ma lo spazio per lasciare la bici è tanto.</p></details>
+    <h3>Spiaggia</h3>
+    <details><summary>Quanto costano ombrellone e lettini?</summary><p>Prezzi e offerte speciali sono tutti su Spiagge.it, dove puoi anche prenotare. <a href="https://widget.spiagge.it/stabilimenti-balneari/prenotazione/it-rn-47838-samsara-beach-club/?lang=it" data-spiagge target="_blank" rel="noopener">Prenota l&#x27;ombrellone</a></p></details>
+    <details><summary>Posso venire senza prenotare?</summary><p>Sì, ma nel weekend conviene arrivare presto: ombrelloni e lettini vanno sold out.</p></details>
+    <details><summary>Quali servizi ci sono?</summary><p>Docce calde, cabine, wi-fi e teli. Puoi anche pranzare sotto l&#x27;ombrellone: ti serve il cameriere. Non abbiamo il deposito bagagli.</p></details>
+    <details><summary>I cani sono ammessi?</summary><p>Sì, i cani sono sempre i benvenuti. Per gli umani dipende.</p></details>
+    <details><summary>La spiaggia è accessibile?</summary><p>Ci sono un bagno accessibile e postazioni sotto l&#x27;ombrellone. Non ci sono la passerella fino al mare e la sedia per il bagno.</p></details>
+    <details><summary>C&#x27;è qualcosa per i bambini?</summary><p>No, non abbiamo giochi né animazione per bambini.</p></details>
+    <h3>Ristorante e aperitivo</h3>
+    <details><summary>Bisogna prenotare per pranzo?</summary><p>Nel weekend conviene. La cucina è aperta fino alle 15. <a href="#ristorante">Prenota un tavolo</a></p></details>
+    <details><summary>Si può mangiare all&#x27;ombrellone?</summary><p>Sì, assolutamente.</p></details>
+    <details><summary>Ci sono piatti vegetariani e vegani?</summary><p>Sì. Piatti senza glutine invece no.</p></details>
+    <details><summary>Posso venire solo per l&#x27;aperitivo?</summary><p>Certo: l&#x27;aperitivo al Samsara è un must, anche senza ombrellone.</p></details>
+    <h3>Beach party</h3>
+    <details><summary>Quando ci sono i beach party?</summary><p>Ad aprile, maggio, giugno e settembre nei weekend, nei festivi e nei prefestivi. A luglio e agosto tutti i giorni.</p></details>
+    <details><summary>Come si paga al beach party?</summary><p>Con i token, che si comprano all&#x27;ingresso e si usano al bar.</p></details>
+    <details><summary>C&#x27;è un&#x27;età minima?</summary><p>Sì, 18 anni. Il giovedì la festa è aperta dai 16 anni.</p></details>
+    <details><summary>C&#x27;è un dress code?</summary><p>No, ma chiediamo un abbigliamento decoroso.</p></details>
+    <details><summary>Come funzionano i tavoli?</summary><p>In alcuni beach party c&#x27;è una spesa minima. Scrivici su WhatsApp per disponibilità e condizioni. <a href="https://wa.me/393486128016" target="_blank" rel="noopener">Scrivici su WhatsApp</a></p></details>
+    <details><summary>Se piove?</summary><p>Il beach party si fa lo stesso, nella parte coperta. Ombrellone e party non vengono rimborsati.</p></details>
+    <h3>Altro</h3>
+    <details><summary>Quali pagamenti accettate?</summary><p>Carte e contanti. Satispay no.</p></details>
+    <details><summary>Organizzate eventi privati?</summary><p>Sì: compleanni, aziende, feste. Scrivi all&#x27;ufficio con il modulo qui sul sito e ti mandiamo un&#x27;offerta dedicata. <a href="#privati">Richiedi un&#x27;offerta</a></p></details>
+    <details><summary>In che lingue parla lo staff?</summary><p>Italiano e inglese.</p></details>
+    <details><summary>Al Winter Beach Party si entra anche senza pacchetto?</summary><p>Sì, il pacchetto Riccione Notte non è obbligatorio.</p></details>
+  </div>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "C'è un parcheggio?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, davanti al locale c'è un parcheggio molto grande, a pagamento."}}, {"@type": "Question", "name": "Posso arrivare in bici?", "acceptedAnswer": {"@type": "Answer", "text": "Sì. Non ci sono rastrelliere, ma lo spazio per lasciare la bici è tanto."}}, {"@type": "Question", "name": "Quanto costano ombrellone e lettini?", "acceptedAnswer": {"@type": "Answer", "text": "Prezzi e offerte speciali sono tutti su Spiagge.it, dove puoi anche prenotare."}}, {"@type": "Question", "name": "Posso venire senza prenotare?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, ma nel weekend conviene arrivare presto: ombrelloni e lettini vanno sold out."}}, {"@type": "Question", "name": "Quali servizi ci sono?", "acceptedAnswer": {"@type": "Answer", "text": "Docce calde, cabine, wi-fi e teli. Puoi anche pranzare sotto l'ombrellone: ti serve il cameriere. Non abbiamo il deposito bagagli."}}, {"@type": "Question", "name": "I cani sono ammessi?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, i cani sono sempre i benvenuti. Per gli umani dipende."}}, {"@type": "Question", "name": "La spiaggia è accessibile?", "acceptedAnswer": {"@type": "Answer", "text": "Ci sono un bagno accessibile e postazioni sotto l'ombrellone. Non ci sono la passerella fino al mare e la sedia per il bagno."}}, {"@type": "Question", "name": "C'è qualcosa per i bambini?", "acceptedAnswer": {"@type": "Answer", "text": "No, non abbiamo giochi né animazione per bambini."}}, {"@type": "Question", "name": "Bisogna prenotare per pranzo?", "acceptedAnswer": {"@type": "Answer", "text": "Nel weekend conviene. La cucina è aperta fino alle 15."}}, {"@type": "Question", "name": "Si può mangiare all'ombrellone?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, assolutamente."}}, {"@type": "Question", "name": "Ci sono piatti vegetariani e vegani?", "acceptedAnswer": {"@type": "Answer", "text": "Sì. Piatti senza glutine invece no."}}, {"@type": "Question", "name": "Posso venire solo per l'aperitivo?", "acceptedAnswer": {"@type": "Answer", "text": "Certo: l'aperitivo al Samsara è un must, anche senza ombrellone."}}, {"@type": "Question", "name": "Quando ci sono i beach party?", "acceptedAnswer": {"@type": "Answer", "text": "Ad aprile, maggio, giugno e settembre nei weekend, nei festivi e nei prefestivi. A luglio e agosto tutti i giorni."}}, {"@type": "Question", "name": "Come si paga al beach party?", "acceptedAnswer": {"@type": "Answer", "text": "Con i token, che si comprano all'ingresso e si usano al bar."}}, {"@type": "Question", "name": "C'è un'età minima?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, 18 anni. Il giovedì la festa è aperta dai 16 anni."}}, {"@type": "Question", "name": "C'è un dress code?", "acceptedAnswer": {"@type": "Answer", "text": "No, ma chiediamo un abbigliamento decoroso."}}, {"@type": "Question", "name": "Come funzionano i tavoli?", "acceptedAnswer": {"@type": "Answer", "text": "In alcuni beach party c'è una spesa minima. Scrivici su WhatsApp per disponibilità e condizioni."}}, {"@type": "Question", "name": "Se piove?", "acceptedAnswer": {"@type": "Answer", "text": "Il beach party si fa lo stesso, nella parte coperta. Ombrellone e party non vengono rimborsati."}}, {"@type": "Question", "name": "Quali pagamenti accettate?", "acceptedAnswer": {"@type": "Answer", "text": "Carte e contanti. Satispay no."}}, {"@type": "Question", "name": "Organizzate eventi privati?", "acceptedAnswer": {"@type": "Answer", "text": "Sì: compleanni, aziende, feste. Scrivi all'ufficio con il modulo qui sul sito e ti mandiamo un'offerta dedicata."}}, {"@type": "Question", "name": "In che lingue parla lo staff?", "acceptedAnswer": {"@type": "Answer", "text": "Italiano e inglese."}}, {"@type": "Question", "name": "Al Winter Beach Party si entra anche senza pacchetto?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, il pacchetto Riccione Notte non è obbligatorio."}}]}</script>
 </section>
 
 <section class="night" id="privati">
