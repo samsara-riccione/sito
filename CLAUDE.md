@@ -6,7 +6,7 @@ Chiunque in ufficio può chiedere modifiche a Claude: queste regole valgono per 
 ## Come lavorare
 - **Mai modificare direttamente il ramo `main`.** `main` è il sito online. Lavora sempre su un ramo nuovo (es. `modifica/banner-ferragosto`) e apri una pull request.
 - Netlify crea un **link di anteprima** per ogni pull request: controllalo su telefono (390 px) e computer (1440 px) prima di chiedere l'approvazione.
-- Le pull request le approva solo un amministratore (Mauro o la persona di riserva). Non fare merge da solo.
+- L'ufficio lavora con gli account del Samsara e ha gli stessi poteri di Mauro: chi chiede la modifica controlla l'anteprima e fa il merge su GitHub. Claude non fa mai il merge da solo: apre la pull request e si ferma.
 - Una modifica per pull request, con titolo e descrizione in italiano semplice: cosa cambia e perché.
 - Contenuti come eventi, menu, foto, orari e playlist: quando il pannello Sanity sarà attivo vanno cambiati lì, non nel codice.
 
@@ -25,7 +25,7 @@ Chiunque in ufficio può chiedere modifiche a Claude: queste regole valgono per 
 - Aperto da Pasqua a metà settembre, tutti i giorni 08:00–22:00; d'inverno solo il Winter Beach Party (31 dicembre e 1 gennaio)
 - Prenotazioni: ombrelloni su Spiagge.it, ristorante su TheFork, tavoli ed eventi su Ticketnation
 
-## Da non toccare senza approvazione di Mauro
+## Da non toccare senza una richiesta esplicita
 - Footer con i dati societari
 - Privacy e cookie (gestiti con Iubenda)
 - Codici di statistiche e pixel (Google Analytics, Meta, TikTok)
