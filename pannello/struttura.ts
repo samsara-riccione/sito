@@ -16,6 +16,14 @@ export const struttura: StructureResolver = (S) =>
             .title('Eventi e party')
             .defaultOrdering([{field: 'inizio', direction: 'asc'}]),
         ),
+      S.listItem()
+        .title('Samsara on Tour')
+        .schemaType('tappaTour')
+        .child(
+          S.documentTypeList('tappaTour')
+            .title('Locandine delle tappe')
+            .defaultOrdering([{field: 'data', direction: 'desc'}]),
+        ),
       S.divider(),
       S.listItem()
         .title('Menu: categorie')
